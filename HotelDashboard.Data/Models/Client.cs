@@ -17,6 +17,10 @@ namespace HotelDashboard.Data.Models
         /// </summary>
         public int RoomId { set; get; }
         /// <summary>
+        /// Комната
+        /// </summary>
+        public virtual Room Room { set; get; }
+        /// <summary>
         /// Имя
         /// </summary>
         public string FirstName { set; get; }
