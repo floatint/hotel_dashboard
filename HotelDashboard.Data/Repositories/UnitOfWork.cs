@@ -19,11 +19,15 @@ namespace HotelDashboard.Data.Repositories
         protected override ICRUDRepository<TEntity> GetRepositoryInstance<TEntity>()
         {
             if (typeof(TEntity) == typeof(Corps))
-                return ((ICRUDRepository<TEntity>)new CorpsRepository(context));
-            //if (typeof(TEntity) == typeof(Floor))
-            //    return ((IRepository<TEntity>)new FloorRepository(_context));
-            //if (typeof(TEntity) == typeof(Room))
-            //    return ((IRepository<TEntity>)new RoomRepository(_context));
+                return (ICRUDRepository<TEntity>)new CorpsRepository(context);
+            if (typeof(TEntity) == typeof(Floor))
+                return (ICRUDRepository<TEntity>)new FloorRepository(context);
+            if (typeof(TEntity) == typeof(Room))
+                return (ICRUDRepository<TEntity>)new RoomRepository(context);
+            if (typeof(TEntity) == typeof(Client))
+                return (ICRUDRepository<TEntity>)new ClientRepository(context);
+            if (typeof(TEntity) == typeof(RoomStatus))
+                return (ICRUDRepository<TEntity>)new RoomStatusRepository(context);
             return base.GetRepositoryInstance<TEntity>();
         }
     }
