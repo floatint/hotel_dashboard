@@ -22,10 +22,6 @@ namespace HotelDashboard.Data.Repositories
         /// </summary>
         Task<IEnumerable<TEntity>> GetAllAsync();
         /// <summary>
-        /// Получить асинхронно сущности по предикату
-        /// </summary>
-        Task<IEnumerable<TEntity>> GetByPredicateAsync(Expression<Func<TEntity, bool>> predicate);
-        /// <summary>
         /// Добавить сущность в источник данных
         /// </summary>
         /// <param name="entity">Сущность для добавления</param>

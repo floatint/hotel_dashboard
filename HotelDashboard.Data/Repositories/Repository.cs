@@ -49,11 +49,6 @@ namespace HotelDashboard.Data.Repositories
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<TEntity>> GetByPredicateAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.Where(predicate).AsNoTracking().ToListAsync();
-        }
-
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _dbSet.AsNoTracking().ToListAsync();
