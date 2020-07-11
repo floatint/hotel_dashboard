@@ -16,7 +16,7 @@ namespace HotelDashboard.Data.Repositories
         public Repository(DbContext context)
         {
             this.context = context;
-            _dbSet = context.Set<TEntity>();
+            dbSet = context.Set<TEntity>();
         }
 
         public virtual void Delete(TEntity entity)
@@ -24,38 +24,38 @@ namespace HotelDashboard.Data.Repositories
             //если сущность пришла из другого контекста
             if (context.Entry(entity).State == EntityState.Detached)
             {
-                _dbSet.Attach(entity);
+                dbSet.Attach(entity);
             }
-            _dbSet.Remove(entity);
+            dbSet.Remove(entity);
         }
 
 
-        public virtual Task<TEntity> GetByIdAsync(object id)
+        public virtual async Task<TEntity> GetByIdAsync(object id)
         {
-            return _dbSet.FindAsync(id).AsTask();
+            return await dbSet.FindAsync(id);
         }
 
         public virtual void Insert(TEntity entity)
         {
-            _dbSet.Add(entity);
+            dbSet.Add(entity);
         }
 
         public virtual void Update(TEntity entity)
         {
             if (context.Entry(entity).State == EntityState.Detached)
             {
-                _dbSet.Attach(entity);
+                dbSet.Attach(entity);
             }
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _dbSet.AsNoTracking().ToListAsync();
+            return await dbSet.AsNoTracking().ToListAsync();
         }
 
         //данные
         protected internal DbContext context;
-        private DbSet<TEntity> _dbSet;
+        protected DbSet<TEntity> dbSet;
     }
 }
