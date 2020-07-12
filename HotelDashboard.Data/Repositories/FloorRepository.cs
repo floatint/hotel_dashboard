@@ -18,7 +18,7 @@ namespace HotelDashboard.Data.Repositories
 
         public override async Task<Floor> GetByIdAsync(object id)
         {
-            return await dbSet.Include(x => x.Rooms).AsNoTracking().FirstOrDefaultAsync(x => Equals(x.Id, id));
+            return await dbSet.Include(x => x.Rooms).AsNoTracking().FirstOrDefaultAsync(x => x.Id == (int)id);
         }
 
         public override async Task<IEnumerable<Floor>> GetAllAsync()

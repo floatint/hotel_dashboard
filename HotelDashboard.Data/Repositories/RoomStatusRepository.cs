@@ -21,7 +21,7 @@ namespace HotelDashboard.Data.Repositories
             return await dbSet
                 .Include(x => x.Clients)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => Equals(x.Id, id));
+                .FirstOrDefaultAsync(x => x.Id == (int)id);
         }
 
         public override async Task<IEnumerable<RoomStatus>> GetAllAsync()
