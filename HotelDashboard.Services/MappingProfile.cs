@@ -15,6 +15,7 @@ namespace HotelDashboard.Services
         public MappingProfile()
         {
             RoomMap();
+            FloorMap();
         }
 
         //Маппинги
@@ -28,6 +29,11 @@ namespace HotelDashboard.Services
 
             CreateMap<Room, RoomView>()
                 .ForMember(rv => rv.IsFree, m => m.MapFrom(r => isFree(r)));
+        }
+
+        private void FloorMap()
+        {
+            CreateMap<Floor, FloorView>();
         }
 
     }
