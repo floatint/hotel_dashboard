@@ -16,6 +16,7 @@ namespace HotelDashboard.Services
         {
             RoomMap();
             FloorMap();
+            CorpsMap();
         }
 
         //Маппинги
@@ -34,6 +35,11 @@ namespace HotelDashboard.Services
         private void FloorMap()
         {
             CreateMap<Floor, FloorView>();
+        }
+
+        private void CorpsMap()
+        {
+            CreateMap<Corps, CorpsView>();
         }
 
     }
