@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200711144444_Init DB.cs" />
     <Compile Remove="Migrations\20200711144444_Init DB.Designer.cs" />
+    <Compile Remove="Migrations\20200713201239_Preset DB data.cs" />
+    <Compile Remove="Migrations\20200713201239_Preset DB data.Designer.cs" />
+    <Compile Remove="Migrations\20200713213839_Client reworked.cs" />
+    <Compile Remove="Migrations\20200713213839_Client reworked.Designer.cs" />
+    <Compile Remove="Migrations\20200713214228_Client reworked.cs" />
+    <Compile Remove="Migrations\20200713214228_Client reworked.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

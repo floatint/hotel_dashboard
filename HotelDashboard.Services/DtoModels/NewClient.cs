@@ -1,25 +1,15 @@
-﻿using System;
+﻿using HotelDashboard.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models.Enums;
 
-namespace HotelDashboard.Data.Models
+namespace HotelDashboard.Services.DtoModels
 {
     /// <summary>
-    /// Модель клиента отеля
+    /// Информация о новом пользователе
     /// </summary>
-    public class Client : BaseModel
+    public class NewClient
     {
-        /// <summary>
-        /// ID комнаты, где проживает клиент
-        /// </summary>
-        public int RoomStatusId { set; get; }
-        /// <summary>
-        /// Комната
-        /// </summary>
-        public virtual RoomStatus RoomStatus { set; get; }
         /// <summary>
         /// Имя
         /// </summary>

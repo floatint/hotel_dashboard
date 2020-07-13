@@ -4,14 +4,16 @@ using HotelDashboard.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelDashboard.Data.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20200713202425_Preset DB data")]
+    partial class PresetDBdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,13 +43,18 @@ namespace HotelDashboard.Data.Migrations
                     b.Property<string>("RegistrationAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoomStatusId")
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoomStatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("SecondName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
 
                     b.HasIndex("RoomStatusId");
 
@@ -2231,11 +2238,15 @@ namespace HotelDashboard.Data.Migrations
 
             modelBuilder.Entity("HotelDashboard.Data.Models.Client", b =>
                 {
-                    b.HasOne("HotelDashboard.Data.Models.RoomStatus", "RoomStatus")
-                        .WithMany("Clients")
-                        .HasForeignKey("RoomStatusId")
+                    b.HasOne("HotelDashboard.Data.Models.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("HotelDashboard.Data.Models.RoomStatus", null)
+                        .WithMany("Clients")
+                        .HasForeignKey("RoomStatusId");
                 });
 
             modelBuilder.Entity("HotelDashboard.Data.Models.Floor", b =>
