@@ -30,6 +30,8 @@ namespace HotelDashboard.Services
 
             CreateMap<Room, RoomView>()
                 .ForMember(rv => rv.IsFree, m => m.MapFrom(r => isFree(r)));
+            CreateMap<NewRoom, Room>();
+            CreateMap<Room, NewRoom>();
         }
 
         private void FloorMap()

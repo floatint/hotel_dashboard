@@ -16,13 +16,29 @@ namespace HotelDashboard.Services.Services
         public FloorService(IUnitOfWork unitOfWork, IMapper mapper)
             : base(unitOfWork, mapper)
         {
-            _floorRepository = unitOfWork.GetRepository<Floor>();
+            _roomRepository = unitOfWork.GetRepository<Room>();
         }
 
-        public async Task<IEnumerable<TDtoEntity>> GetAllRooms<TDtoEntity>(int floorId)
+        public async Task<TOutDtoEntity> AddRoomAsync<TOutDtoEntity, TInDtoEntity>(int floorId, TInDtoEntity dtoRoom)
+        {
+            Floor floor = await repository.GetByIdAsync(floorId);
+            if (floor == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            } else
+            {
+                Room room = mapper.Map<Room>(dtoRoom);
+                room.FloorId = floorId;
+                _roomRepository.Insert(room);
+                await unitOfWork.SaveAsync();
+                return mapper.Map<TOutDtoEntity>(room);
+            }
+        }
+
+        public async Task<IEnumerable<TDtoEntity>> GetAllRoomsAsync<TDtoEntity>(int floorId)
         {
             //пытаемся получить объект этажа
-            Floor floor = await _floorRepository.GetByIdAsync(floorId);
+            Floor floor = await repository.GetByIdAsync(floorId);
             if (floor == null)
             {
                 throw new ArgumentOutOfRangeException();
@@ -33,6 +49,19 @@ namespace HotelDashboard.Services.Services
             }
         }
 
-        private ICRUDRepository<Floor> _floorRepository;
+        public async Task DeleteRoomAsync(int roomId)
+        {
+            Room room = await _roomRepository.GetByIdAsync(roomId);
+            if (room == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            } else
+            {
+                _roomRepository.Delete(room);
+                await unitOfWork.SaveAsync();
+            }
+        }
+
+        private ICRUDRepository<Room> _roomRepository;
     }
 }
