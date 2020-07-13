@@ -17,6 +17,7 @@ namespace HotelDashboard.Services
             RoomMap();
             FloorMap();
             CorpsMap();
+            ClientMap();
         }
 
         //Маппинги
@@ -42,6 +43,11 @@ namespace HotelDashboard.Services
         private void CorpsMap()
         {
             CreateMap<Corps, CorpsView>();
+        }
+
+        private void ClientMap()
+        {
+            CreateMap<NewClient, Client>();
         }
 
     }
