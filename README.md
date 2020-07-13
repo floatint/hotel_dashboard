@@ -14,10 +14,10 @@
 ### hotel_dashboard_db.bak
 Копия БД. 
 
-SQL Server Management Studio						15.0.18206.0
-Клиентские средства служб Microsoft Analysis Services						15.0.1567.0
-Компоненты доступа к данным (MDAC)						10.0.14393.0
-Microsoft MSXML						3.0 4.0 6.0 
-Microsoft Internet Explorer						9.11.14393.0
-Microsoft .NET Framework						4.0.30319.42000
-Операционная система						10.0.14393
+* SQL Server Management Studio						15.0.18206.0
+* Клиентские средства служб Microsoft Analysis Services						15.0.1567.0
+* Компоненты доступа к данным (MDAC)						10.0.14393.0
+* Microsoft MSXML						3.0 4.0 6.0 
+* Microsoft Internet Explorer						9.11.14393.0
+* Microsoft .NET Framework						4.0.30319.42000
+* Операционная система						10.0.14393
