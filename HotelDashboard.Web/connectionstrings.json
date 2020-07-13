@@ -1,0 +1,8 @@
+/*
+  Содержит настройки подключения к БД
+*/
+{
+  "ConnectionStrings": {
+    "HotelContext": "Server=LAPTOP-8CJ28E9M;Database=hotel_dashboard_db;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}

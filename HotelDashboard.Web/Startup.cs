@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelDashboard.Data;
+using HotelDashboard.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,20 @@ namespace HotelDashboard.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //создаем необходимые модули для работы
+            ICollection<IModule> modules = new List<IModule>
+            {
+                new DataModule(),
+                new ServicesModule(),
+                new WebModule()
+            };
+            _startupModule = new StartupModule(modules);
+
+            //сборка конфигурации
+            Configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile("connectionstrings.json")
+                .Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -24,6 +40,7 @@ namespace HotelDashboard.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            _startupModule.ConfigureServices(services, Configuration);
             services.AddControllers();
         }
 
@@ -43,6 +60,15 @@ namespace HotelDashboard.Web
             {
                 endpoints.MapControllers();
             });
+
+            //сваггер
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API");
+            });
         }
+
+        private StartupModule _startupModule { set; get; }
     }
 }
