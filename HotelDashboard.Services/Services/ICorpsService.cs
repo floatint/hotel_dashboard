@@ -16,6 +16,18 @@ namespace HotelDashboard.Services.Services
         /// </summary>
         /// <typeparam name="TDtoEntity">Тип выходной сущности</typeparam>
         /// <param name="corpsId">ID корпуса</param>
-        Task<IEnumerable<TDtoEntity>> GetAllFloors<TDtoEntity>(int corpsId);
+        Task<IEnumerable<TDtoEntity>> GetAllFloorsAsync<TDtoEntity>(int corpsId);
+        /// <summary>
+        /// Добавить этаж в корпус
+        /// </summary>
+        /// <typeparam name="TDtoEntity">Тип выходной сущности</typeparam>
+        /// <param name="corpsId">ID корпуса</param>
+        Task<TDtoEntity> AddFloorAsync<TDtoEntity>(int corpsId);
+        /// <summary>
+        /// Удалить этаж из корпуса
+        /// </summary>
+        /// <param name="corpsId">ID корпуса</param>
+        /// <param name="floorId">ID этажа</param>
+        Task DeleteFloorAsync(int corpsId, int floorId);
     }
 }
