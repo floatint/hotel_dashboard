@@ -11,6 +11,9 @@ namespace HotelDashboard.Services.DtoModels
     /// </summary>
     public class RoomView : BaseModel
     {
+        /// <summary>
+        /// Тип комнаты
+        /// </summary>
         public RoomType Type { set; get; }
         /// <summary>
         /// Комната свободна для резервирования или заселения

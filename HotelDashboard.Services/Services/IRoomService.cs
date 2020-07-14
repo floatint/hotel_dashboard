@@ -22,6 +22,7 @@ namespace HotelDashboard.Services.Services
         /// Заселить клиентов к комнату
         /// </summary>
         /// <typeparam name="TDtoEntity">Тип DTO сущности клиента</typeparam>
+        /// <param name="roomId">ID комнаты</param>
         /// <param name="clients">Заселяющиеся клиенты</param>
         Task PopulateRoomAsync<TDtoEntity>(int roomId, IEnumerable<TDtoEntity> clients);
         /// <summary>

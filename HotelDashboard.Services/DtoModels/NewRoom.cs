@@ -10,6 +10,9 @@ namespace HotelDashboard.Services.DtoModels
     /// </summary>
     public class NewRoom
     {
+        /// <summary>
+        /// Тип комнаты
+        /// </summary>
         public RoomType Type { set; get; }
     }
 }

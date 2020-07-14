@@ -36,8 +36,7 @@ namespace HotelDashboard.Web.Controllers
         /// Резервирование комнаты
         /// </summary>
         /// <param name="roomId">ID комнаты</param>
-        /// <param name="reserveStart">Дата резервирования</param>
-        /// <param name="reserveEnd">Дата окончания резервирования</param>
+        /// <param name="data">Данные для резервирования</param>
         [HttpPut("{roomId}/reserve")]
         public async Task ReserveRoomAsync(int roomId,  [FromBody] ReserveData data)
         {

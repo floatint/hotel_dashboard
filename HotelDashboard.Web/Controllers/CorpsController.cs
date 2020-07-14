@@ -73,6 +73,12 @@ namespace HotelDashboard.Web.Controllers
             return await _service.AddFloorAsync<FloorView>(corpsId);
         }
 
+        //TODO: пересмотреть, возможно id корпуса не нужен
+        /// <summary>
+        /// Удалить этаж корпуса
+        /// </summary>
+        /// <param name="corpsId">ID корпуса</param>
+        /// <param name="floorId">ID этажа</param>
         [HttpDelete("{corpsId}/floors/{floorId}")]
         public async Task DeleteFloor(int corpsId, int floorId)
         {
