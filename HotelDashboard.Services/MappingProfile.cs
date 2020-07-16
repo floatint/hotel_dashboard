@@ -27,25 +27,25 @@ namespace HotelDashboard.Services
                 return r.Status == null;
             };
 
-            CreateMap<Room, RoomView>()
+            CreateMap<Room, RoomDto>()
                 .ForMember(rv => rv.IsFree, m => m.MapFrom(r => isFree(r)));
-            CreateMap<NewRoom, Room>();
-            CreateMap<Room, NewRoom>();
+            CreateMap<NewRoomDto, Room>();
+            CreateMap<Room, NewRoomDto>();
         }
 
         private void FloorMap()
         {
-            CreateMap<Floor, FloorView>();
+            CreateMap<Floor, FloorDto>();
         }
 
         private void CorpsMap()
         {
-            CreateMap<Corps, CorpsView>();
+            CreateMap<Corps, CorpsDto>();
         }
 
         private void ClientMap()
         {
-            CreateMap<NewClient, Client>();
+            CreateMap<NewClientDto, Client>();
         }
 
     }

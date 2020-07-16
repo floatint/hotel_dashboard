@@ -5,7 +5,7 @@ namespace HotelDashboard.Services.DtoModels
     /// <summary>
     /// Данные для резервирования комнаты
     /// </summary>
-    public class ReserveData
+    public class ReserveDataDto
     {
         /// <summary>
         /// Дата резервирования

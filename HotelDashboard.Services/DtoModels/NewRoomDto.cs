@@ -5,7 +5,7 @@ namespace HotelDashboard.Services.DtoModels
     /// <summary>
     /// Информация для создания новой комнаты
     /// </summary>
-    public class NewRoom
+    public class NewRoomDto
     {
         /// <summary>
         /// Тип комнаты

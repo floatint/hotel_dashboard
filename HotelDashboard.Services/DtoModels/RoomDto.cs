@@ -6,7 +6,7 @@ namespace HotelDashboard.Services.DtoModels
     /// <summary>
     /// Общая информация о комнате
     /// </summary>
-    public class RoomView : BaseModel
+    public class RoomDto : BaseModel
     {
         /// <summary>
         /// Тип комнаты

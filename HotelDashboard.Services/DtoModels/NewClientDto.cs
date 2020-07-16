@@ -6,7 +6,7 @@ namespace HotelDashboard.Services.DtoModels
     /// <summary>
     /// Информация о новом пользователе
     /// </summary>
-    public class NewClient
+    public class NewClientDto
     {
         /// <summary>
         /// Имя

@@ -34,7 +34,7 @@ namespace HotelDashboard.Web.Controllers
         /// <param name="roomId">ID комнаты</param>
         /// <param name="data">Данные для резервирования</param>
         [HttpPut("{roomId}/reserve")]
-        public async Task ReserveRoomAsync(int roomId, [FromBody] ReserveData data)
+        public async Task ReserveRoomAsync(int roomId, [FromBody] ReserveDataDto data)
         {
             await _service.ReserveRoomAsync(roomId, data.ReserveStart, data.ReserveEnd);
         }
@@ -45,7 +45,7 @@ namespace HotelDashboard.Web.Controllers
         /// <param name="roomId">ID комнаты</param>
         /// <param name="clients">Клиенты</param>
         [HttpPut("{roomId}/populate")]
-        public async Task PopulateRoomAsync(int roomId, [FromBody] IEnumerable<NewClient> clients)
+        public async Task PopulateRoomAsync(int roomId, [FromBody] IEnumerable<NewClientDto> clients)
         {
             await _service.PopulateRoomAsync(roomId, clients);
         }

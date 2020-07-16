@@ -20,9 +20,9 @@ namespace HotelDashboard.Web.Controllers
         /// </summary>
         /// <param name="floorId"></param>
         [HttpGet("{floorId}/rooms")]
-        public async Task<IEnumerable<RoomView>> GetRoomsAsync(int floorId)
+        public async Task<IEnumerable<RoomDto>> GetRoomsAsync(int floorId)
         {
-            return await _service.GetAllRoomsAsync<RoomView>(floorId);
+            return await _service.GetAllRoomsAsync<RoomDto>(floorId);
         }
 
         /// <summary>
@@ -31,9 +31,9 @@ namespace HotelDashboard.Web.Controllers
         /// <param name="floorId">"ID этажа</param>
         /// <param name="dtoRoom">DTO комнаты</param>
         [HttpPost("{floorId}/rooms")]
-        public async Task<RoomView> AddRoomAsync(int floorId, [FromBody] NewRoom dtoRoom)
+        public async Task<RoomDto> AddRoomAsync(int floorId, [FromBody] NewRoomDto dtoRoom)
         {
-            return await _service.AddRoomAsync<RoomView, NewRoom>(floorId, dtoRoom);
+            return await _service.AddRoomAsync<RoomDto, NewRoomDto>(floorId, dtoRoom);
         }
 
         /// <summary>
