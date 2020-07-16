@@ -17,7 +17,7 @@ namespace HotelDashboard.Data.Repositories
 
         public virtual void Delete(TEntity entity)
         {
-            //если сущность пришла из другого контекста
+            // если сущность пришла из другого контекста
             if (context.Entry(entity).State == EntityState.Detached)
             {
                 dbSet.Attach(entity);

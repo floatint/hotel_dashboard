@@ -9,10 +9,10 @@ namespace HotelDashboard.Data
     {
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            //регистрируем сервис unit of work
+            // регистрируем сервис unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //регистрируем контекст БД.
-            //connection string берется из IConfiguration
+            // регистрируем контекст БД.
+            // connection string берется из IConfiguration
             services.AddDbContext<HotelContext>(optsBuilder => optsBuilder.UseSqlServer(configuration.GetConnectionString(typeof(HotelContext).Name)));
         }
     }

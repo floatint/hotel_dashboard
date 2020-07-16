@@ -18,7 +18,7 @@ namespace HotelDashboard.Services.Services
         /// <param name="reserveEnd">Дата окончания резервирования</param>
         Task ReserveRoomAsync(int roomId, DateTime reserveStart, DateTime reserveEnd);
         /// <summary>
-        /// Заселить клиентов к комнату
+        /// Заселить клиентов в комнату
         /// </summary>
         /// <typeparam name="TDtoEntity">Тип DTO сущности клиента</typeparam>
         /// <param name="roomId">ID комнаты</param>

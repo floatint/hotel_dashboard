@@ -21,7 +21,7 @@ namespace HotelDashboard.Services.Services
 
         public async Task FreeRoom(int roomId)
         {
-            //найдем комнату
+            // найдем комнату
             Room room = await repository.GetByIdAsync(roomId);
             if (room == null)
             {
@@ -30,21 +30,21 @@ namespace HotelDashboard.Services.Services
             else
             {
                 RoomStatus status = room.Status;
-                //если комната не свободна
+                // если комната не свободна
                 if (status != null)
                 {
-                    //если номер заселен
+                    // если номер заселен
                     if (status.Clients != null)
                     {
-                        //выписываем клиентов
+                        // выписываем клиентов
                         foreach (var client in status.Clients)
                         {
                             _clientRepository.Delete(client);
                         }
                     }
-                    //удаляем статус
+                    // удаляем статус
                     _roomStatusRepository.Delete(status);
-                    //сохраняем контекст
+                    // сохраняем контекст
                     await unitOfWork.SaveAsync();
                 }
             }
@@ -52,27 +52,27 @@ namespace HotelDashboard.Services.Services
 
         public async Task PopulateRoomAsync<TDtoEntity>(int roomId, IEnumerable<TDtoEntity> clients)
         {
-            //получаем комнату
+            // получаем комнату
             Room room = await repository.GetByIdAsync(roomId);
-            //проверим, существует ли комната
+            // проверим, существует ли комната
             if (room == null)
             {
-                //не существует
+                // не существует
                 throw new ArgumentOutOfRangeException();
             }
             else
             {
-                //маппинг в доменные модели клиентов
+                // маппинг в доменные модели клиентов
                 IEnumerable<Client> domainClients = mapper.Map<IEnumerable<Client>>(clients);
 
-                //заселяем клиентов
-                //полагаем, что status != null
+                // заселяем клиентов
+                // полагаем, что status != null
                 foreach (var client in domainClients)
                 {
                     client.RoomStatusId = room.Status.Id;
                     _clientRepository.Insert(client);
                 }
-                //сохраняем контекст
+                // сохраняем контекст
                 await unitOfWork.SaveAsync();
             }
 
@@ -80,7 +80,7 @@ namespace HotelDashboard.Services.Services
 
         public async Task ReserveRoomAsync(int roomId, DateTime reserveStart, DateTime reserveEnd)
         {
-            //убедимся, что комната существует
+            // убедимся, что комната существует
             if (await repository.GetByIdAsync(roomId) == null)
             {
                 throw new ArgumentOutOfRangeException();
@@ -94,7 +94,7 @@ namespace HotelDashboard.Services.Services
                     ReserveEnd = reserveEnd
                 };
                 _roomStatusRepository.Insert(status);
-                //сохраняем
+                // сохраняем
                 await unitOfWork.SaveAsync();
             }
         }

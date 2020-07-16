@@ -19,7 +19,7 @@ namespace HotelDashboard.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //создаем необходимые модули для работы
+            // создаем необходимые модули для работы
             ICollection<IModule> modules = new List<IModule>
             {
                 new DataModule(),
@@ -28,7 +28,7 @@ namespace HotelDashboard.Web
             };
             _startupModule = new StartupModule(modules);
 
-            //сборка конфигурации
+            // сборка конфигурации
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile("connectionstrings.json")

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
 {
+    /// <summary>
+    /// Базовая реализация сервиса
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности, с которой работает сервис</typeparam>
     public class BaseService<TEntity> : IBaseCRUDService<TEntity> where TEntity : BaseModel
     {
         public BaseService(IUnitOfWork unitOfWork, IMapper mapper)

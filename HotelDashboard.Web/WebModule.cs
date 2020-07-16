@@ -12,16 +12,16 @@ using Microsoft.OpenApi.Models;
 namespace HotelDashboard.Web
 {
     /// <summary>
-    /// Подуль, настраивающий web часть
+    /// Модуль, настраивающий web часть
     /// </summary>
     public class WebModule : IModule
     {
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            //ригистрируем конфигурацию как статическую
+            // регистрируем конфигурацию как статическую
             services.AddSingleton<IConfiguration>(configuration);
-            //сваггер
-            //Копипаста с МСДН
+            // сваггер
+            // Копипаста с МСДН
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -32,15 +32,15 @@ namespace HotelDashboard.Web
                 });
 
                 // Подключаем XML документацию
-                //для Web API модуля
+                // для Web API модуля
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-                //для сервисов
+                // для сервисов
                 xmlFile = $"{nameof(HotelDashboard)}.{nameof(Services)}.xml";
                 xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-                //для данных
+                // для данных
                 xmlFile = $"{nameof(HotelDashboard)}.{nameof(Data)}.xml";
                 xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);

@@ -18,10 +18,10 @@ namespace HotelDashboard.Services
             ClientMap();
         }
 
-        //Маппинги
+        // Маппинги
         private void RoomMap()
         {
-            //если у комнаты нет записи о статусе, то она свободна
+            // если у комнаты нет записи о статусе, то она свободна
             Func<Room, bool> isFree = (Room r) =>
             {
                 return r.Status == null;
