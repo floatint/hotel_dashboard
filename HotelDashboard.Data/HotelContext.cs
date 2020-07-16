@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
+﻿using HotelDashboard.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelDashboard.Data
 {
@@ -104,7 +96,7 @@ namespace HotelDashboard.Data
             int roomsCount = (PRESET_SINGLE_ROOM_COUNT +
                               PRESET_DOUBLE_ROOM_COUNT +
                               PRESET_FAMILY_ROOM_COUNT) * (PRESET_CORPS_COUNT * PRESET_FLOORS_COUNT);
-            
+
             Room[] rooms = new Room[roomsCount];
             int roomIndex = 0;
             for (int floorId = 1; floorId <= (PRESET_CORPS_COUNT * PRESET_FLOORS_COUNT); floorId++)

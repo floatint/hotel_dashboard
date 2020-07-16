@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelDashboard.Data.Models
+﻿namespace HotelDashboard.Data.Models
 {
     /// <summary>
     /// Базовая модель. Содержит общие поля для всех моделей. Например, ID

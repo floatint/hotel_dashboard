@@ -1,11 +1,7 @@
 ﻿using HotelDashboard.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace HotelDashboard.Data.Repositories
 {

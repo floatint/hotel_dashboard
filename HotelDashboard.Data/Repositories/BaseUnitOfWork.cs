@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelDashboard.Data.Repositories
 {
@@ -23,7 +21,7 @@ namespace HotelDashboard.Data.Repositories
         {
             object result;
             var type = typeof(TEntity);
-            
+
             // попытка вытащить уже созданный репозиторий из кэша
             // если в кэше нет - создаем новый инстанс
             if (!_repositories.TryGetValue(type, out result))
