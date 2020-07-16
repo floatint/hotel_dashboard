@@ -9,6 +9,9 @@ namespace HotelDashboard.Data.Models
     /// </summary>
     public class BaseModel
     {
+        /// <summary>
+        /// ID модели
+        /// </summary>
         public int Id { set; get; }
     }
 }
