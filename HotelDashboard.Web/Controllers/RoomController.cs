@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelDashboard.Web.Controllers
 {
@@ -38,7 +34,7 @@ namespace HotelDashboard.Web.Controllers
         /// <param name="roomId">ID комнаты</param>
         /// <param name="data">Данные для резервирования</param>
         [HttpPut("{roomId}/reserve")]
-        public async Task ReserveRoomAsync(int roomId,  [FromBody] ReserveData data)
+        public async Task ReserveRoomAsync(int roomId, [FromBody] ReserveData data)
         {
             await _service.ReserveRoomAsync(roomId, data.ReserveStart, data.ReserveEnd);
         }
