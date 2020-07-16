@@ -2,8 +2,6 @@
 using HotelDashboard.Data.Models;
 using HotelDashboard.Services.DtoModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelDashboard.Services
 {

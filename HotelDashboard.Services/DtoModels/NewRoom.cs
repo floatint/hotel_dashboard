@@ -1,7 +1,4 @@
 ﻿using HotelDashboard.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelDashboard.Services.DtoModels
 {

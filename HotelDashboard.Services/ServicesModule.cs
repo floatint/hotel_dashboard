@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using HotelDashboard.Data;
 using HotelDashboard.Services.Services;
 using Microsoft.Extensions.Configuration;

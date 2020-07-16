@@ -3,7 +3,6 @@ using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
@@ -25,7 +24,8 @@ namespace HotelDashboard.Services.Services
             if (floor == null)
             {
                 throw new ArgumentOutOfRangeException();
-            } else
+            }
+            else
             {
                 Room room = mapper.Map<Room>(dtoRoom);
                 room.FloorId = floorId;
@@ -55,7 +55,8 @@ namespace HotelDashboard.Services.Services
             if (room == null)
             {
                 throw new ArgumentOutOfRangeException();
-            } else
+            }
+            else
             {
                 _roomRepository.Delete(room);
                 await unitOfWork.SaveAsync();
