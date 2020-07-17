@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotelDashboard.Data.Models;
 using HotelDashboard.Services.DtoModels;
+using HotelDashboard.Services.DtoModels.Enums;
 using System;
 
 namespace HotelDashboard.Services
@@ -21,14 +22,31 @@ namespace HotelDashboard.Services
         // Маппинги
         private void RoomMap()
         {
-            // если у комнаты нет записи о статусе, то она свободна
-            Func<Room, bool> isFree = (Room r) =>
+            // определим состояние комнаты
+            Func<Room, RoomState> roomState = (Room r) =>
             {
-                return r.Status == null;
+                // если нет статуса вообще - свободна
+                if (r.Status == null)
+                {
+                    return RoomState.Free;
+                }
+                else
+                {
+                    // если есть клиенты
+                    if (r.Status.Clients != null && r.Status.Clients.Count != 0)
+                    {
+                        return RoomState.Populated;
+                    }
+                    else
+                    {
+                        // просто зарезервирована
+                        return RoomState.Reserved;
+                    }
+                }
             };
 
             CreateMap<Room, RoomDto>()
-                .ForMember(rv => rv.IsFree, m => m.MapFrom(r => isFree(r)));
+                .ForMember(rv => rv.State, m => m.MapFrom(r => roomState(r)));
             CreateMap<NewRoomDto, Room>();
             CreateMap<Room, NewRoomDto>();
         }

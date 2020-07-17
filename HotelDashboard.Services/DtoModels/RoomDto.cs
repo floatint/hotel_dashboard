@@ -1,5 +1,6 @@
 ﻿using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Models.Enums;
+using HotelDashboard.Services.DtoModels.Enums;
 
 namespace HotelDashboard.Services.DtoModels
 {
@@ -13,8 +14,8 @@ namespace HotelDashboard.Services.DtoModels
         /// </summary>
         public RoomType Type { set; get; }
         /// <summary>
-        /// Комната свободна для резервирования или заселения
+        /// Состояние комнаты
         /// </summary>
-        public bool IsFree { set; get; }
+        public RoomState State { set; get; }
     }
 }
