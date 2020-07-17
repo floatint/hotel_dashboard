@@ -4,9 +4,94 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelDashboard.WPFClient"
+        xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels"
+        xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1000">
+    <!-- Ресурсы окна -->
+    <Window.Resources>
+        <conv:IndexConverter x:Key="IndexConverter"/>
+    </Window.Resources>
+    <!-- Подключаем контекст данных-->
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    
     <Grid>
+        <TabControl>
+            <TabItem Width="150" Height="30" Header="Управление">
+                <StackPanel Width ="250" HorizontalAlignment="Left" Background="Gray">
+                    <TextBlock Text="Корпус" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 5, 0, 5">
+                    </TextBlock>
+                    <!-- Панель с корпусами -->
+                    <WrapPanel Height="50" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <ItemsControl x:Name="CorpsList" ItemsSource="{Binding Coprs}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
 
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <RadioButton GroupName="Corps"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="0, 0, 3, 3"
+                                                 Style="{StaticResource {x:Type ToggleButton}}"
+                                                 Content="{Binding Id}"
+                                                 Command="{Binding DataContext.OnSelectCorps, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                                 CommandParameter="{Binding}"
+                                                 />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </WrapPanel>
+                    <TextBlock Text="Этаж" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 0, 0, 5">
+                    </TextBlock>
+                    <!-- Панель с этажами -->
+                    <WrapPanel Height="100" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <ItemsControl x:Name="FloorList" ItemsSource="{Binding Floors}" AlternationCount="8">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <RadioButton GroupName="Floors"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="0, 0, 3, 3"
+                                                 Style="{StaticResource {x:Type ToggleButton}}"
+                                                 Content="{Binding Path=(ItemsControl.AlternationIndex), 
+                                                                   RelativeSource={RelativeSource Mode=TemplatedParent},
+                                                                   Converter={StaticResource IndexConverter}}"
+                                                 Command="{Binding DataContext.OnSelectFloor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                                 CommandParameter="{Binding}"
+                                                 />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </WrapPanel>
+                    <TextBlock Text="Комнаты" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 5, 0, 0">
+                    </TextBlock>
+                    <!-- Панель с комнатами -->
+                </StackPanel>
+            </TabItem>
+            <TabItem Width="150" Height="30" Header="Статистика" Margin="-2,-1,2,1">
+                
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

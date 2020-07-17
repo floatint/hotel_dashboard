@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HotelDashboard.WPFClient"
+                    xmlns:clr="clr-namespace:System;assembly=System.Runtime">
+    <!-- Базовый адрес Web Api-->
+    <clr:String x:Key="WebApiBaseURI">http://localhost:49819/</clr:String>
+</ResourceDictionary>
