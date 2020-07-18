@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Repositories;
+using HotelDashboard.Services.DtoModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -96,6 +97,19 @@ namespace HotelDashboard.Services.Services
                 _roomStatusRepository.Insert(status);
                 // сохраняем
                 await unitOfWork.SaveAsync();
+            }
+        }
+
+        public async Task<TDtoEntity> GetRoomInfoAsync<TDtoEntity>(int roomId)
+        {
+            Room room = await repository.GetByIdAsync(roomId);
+            if (room == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                return mapper.Map<TDtoEntity>(room);
             }
         }
 

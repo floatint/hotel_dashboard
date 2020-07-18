@@ -29,5 +29,11 @@ namespace HotelDashboard.Services.Services
         /// </summary>
         /// <param name="roomId">ID комнаты</param>
         Task FreeRoom(int roomId);
+        /// <summary>
+        /// Получить детальную информацию о комнате
+        /// </summary>
+        /// <typeparam name="TDtoEntity">Тип DTO комнаты</typeparam>
+        /// <param name="roomId">ID комнаты</param>
+        Task<TDtoEntity> GetRoomInfoAsync<TDtoEntity>(int roomId);
     }
 }

@@ -50,6 +50,16 @@ namespace HotelDashboard.Web.Controllers
             await _service.PopulateRoomAsync(roomId, clients);
         }
 
+        /// <summary>
+        /// Получить информацию о комнате
+        /// </summary>
+        /// <param name="roomId">ID комнаты</param>
+        [HttpGet("{roomId}/info")]
+        public async Task<RoomInfoDto> GetRoomInfoAsync(int roomId)
+        {
+            return await _service.GetRoomInfoAsync<RoomInfoDto>(roomId);
+        }
+
         private IRoomService _service;
     }
 }

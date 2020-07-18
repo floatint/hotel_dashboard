@@ -49,6 +49,12 @@ namespace HotelDashboard.Services
                 .ForMember(rv => rv.State, m => m.MapFrom(r => roomState(r)));
             CreateMap<NewRoomDto, Room>();
             CreateMap<Room, NewRoomDto>();
+
+            // выборка информации комнаты
+            CreateMap<Room, RoomInfoDto>()
+                .ForMember(ri => ri.ReserveStart, m => m.MapFrom(r => r.Status != null ? r.Status.ReserveStart : default))
+                .ForMember(ri => ri.ReserveEnd, m => m.MapFrom(r => r.Status != null ? r.Status.ReserveEnd : default))
+                .ForMember(ri => ri.Clients, m => m.MapFrom(r => r.Status != null ? r.Status.Clients : default));
         }
 
         private void FloorMap()
@@ -64,6 +70,7 @@ namespace HotelDashboard.Services
         private void ClientMap()
         {
             CreateMap<NewClientDto, Client>();
+            CreateMap<Client, ClientDto>();
         }
 
     }
