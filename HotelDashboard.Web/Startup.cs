@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HotelDashboard.Data;
 using HotelDashboard.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace HotelDashboard.Web
 {
@@ -19,7 +14,7 @@ namespace HotelDashboard.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //создаем необходимые модули для работы
+            // создаем необходимые модули для работы
             ICollection<IModule> modules = new List<IModule>
             {
                 new DataModule(),
@@ -28,7 +23,7 @@ namespace HotelDashboard.Web
             };
             _startupModule = new StartupModule(modules);
 
-            //сборка конфигурации
+            // сборка конфигурации
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile("connectionstrings.json")

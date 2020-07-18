@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelDashboard.Web.Controllers
 {
@@ -36,10 +32,9 @@ namespace HotelDashboard.Web.Controllers
         /// Резервирование комнаты
         /// </summary>
         /// <param name="roomId">ID комнаты</param>
-        /// <param name="reserveStart">Дата резервирования</param>
-        /// <param name="reserveEnd">Дата окончания резервирования</param>
+        /// <param name="data">Данные для резервирования</param>
         [HttpPut("{roomId}/reserve")]
-        public async Task ReserveRoomAsync(int roomId,  [FromBody] ReserveData data)
+        public async Task ReserveRoomAsync(int roomId, [FromBody] ReserveDataDto data)
         {
             await _service.ReserveRoomAsync(roomId, data.ReserveStart, data.ReserveEnd);
         }
@@ -50,9 +45,19 @@ namespace HotelDashboard.Web.Controllers
         /// <param name="roomId">ID комнаты</param>
         /// <param name="clients">Клиенты</param>
         [HttpPut("{roomId}/populate")]
-        public async Task PopulateRoomAsync(int roomId, [FromBody] IEnumerable<NewClient> clients)
+        public async Task PopulateRoomAsync(int roomId, [FromBody] IEnumerable<NewClientDto> clients)
         {
             await _service.PopulateRoomAsync(roomId, clients);
+        }
+
+        /// <summary>
+        /// Получить информацию о комнате
+        /// </summary>
+        /// <param name="roomId">ID комнаты</param>
+        [HttpGet("{roomId}/info")]
+        public async Task<RoomInfoDto> GetRoomInfoAsync(int roomId)
+        {
+            return await _service.GetRoomInfoAsync<RoomInfoDto>(roomId);
         }
 
         private IRoomService _service;

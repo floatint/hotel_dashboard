@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelDashboard.Web.Controllers
 {
@@ -19,18 +15,31 @@ namespace HotelDashboard.Web.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Получить все комнаты на этаже
+        /// </summary>
+        /// <param name="floorId"></param>
         [HttpGet("{floorId}/rooms")]
-        public async Task<IEnumerable<RoomView>> GetRoomsAsync(int floorId)
+        public async Task<IEnumerable<RoomDto>> GetRoomsAsync(int floorId)
         {
-            return await _service.GetAllRoomsAsync<RoomView>(floorId);
+            return await _service.GetAllRoomsAsync<RoomDto>(floorId);
         }
 
+        /// <summary>
+        /// Добавить комнату на этаж
+        /// </summary>
+        /// <param name="floorId">"ID этажа</param>
+        /// <param name="dtoRoom">DTO комнаты</param>
         [HttpPost("{floorId}/rooms")]
-        public async Task<RoomView> AddRoomAsync(int floorId, [FromBody] NewRoom dtoRoom)
+        public async Task<RoomDto> AddRoomAsync(int floorId, [FromBody] NewRoomDto dtoRoom)
         {
-            return await _service.AddRoomAsync<RoomView, NewRoom>(floorId, dtoRoom);
+            return await _service.AddRoomAsync<RoomDto, NewRoomDto>(floorId, dtoRoom);
         }
 
+        /// <summary>
+        /// Удалить комнату с этажа
+        /// </summary>
+        /// <param name="roomId">ID комнаты</param>
         [HttpDelete("rooms/{roomId}")]
         public async Task DeleteRoomAsync(int roomId)
         {

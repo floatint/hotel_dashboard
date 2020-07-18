@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
-using HotelDashboard.Services.DtoModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelDashboard.Web.Controllers
 {
@@ -26,9 +22,9 @@ namespace HotelDashboard.Web.Controllers
         /// Получить список всех корпусов
         /// </summary>
         [HttpGet]
-        public async Task<IEnumerable<CorpsView>> GetAllCorpsAsync()
+        public async Task<IEnumerable<CorpsDto>> GetAllCorpsAsync()
         {
-            return await _service.GetAllAsync<CorpsView>();
+            return await _service.GetAllAsync<CorpsDto>();
         }
 
         /// <summary>
@@ -36,9 +32,9 @@ namespace HotelDashboard.Web.Controllers
         /// </summary>
         /// <returns>ID созданного корпуса</returns>
         [HttpPost]
-        public async Task<CorpsView> AddCorpsAsync()
+        public async Task<CorpsDto> AddCorpsAsync()
         {
-            CorpsView corpsView = new CorpsView();
+            CorpsDto corpsView = new CorpsDto();
             corpsView.Id = await _service.AddAsync(corpsView);
             return corpsView;
         }
@@ -58,9 +54,9 @@ namespace HotelDashboard.Web.Controllers
         /// </summary>
         /// <param name="corpsId">ID корпуса</param>
         [HttpGet("{corpsId}/floors")]
-        public async Task<IEnumerable<FloorView>> GetAllFloorsAsync(int corpsId)
+        public async Task<IEnumerable<FloorDto>> GetAllFloorsAsync(int corpsId)
         {
-            return await _service.GetAllFloorsAsync<FloorView>(corpsId);
+            return await _service.GetAllFloorsAsync<FloorDto>(corpsId);
         }
 
         /// <summary>
@@ -68,11 +64,17 @@ namespace HotelDashboard.Web.Controllers
         /// </summary>'
         /// <param name="corpsId">ID корпуса</param>
         [HttpPost("{corpsId}/floors")]
-        public async Task<FloorView> AddFloorAsync(int corpsId)
+        public async Task<FloorDto> AddFloorAsync(int corpsId)
         {
-            return await _service.AddFloorAsync<FloorView>(corpsId);
+            return await _service.AddFloorAsync<FloorDto>(corpsId);
         }
 
+        //TODO: пересмотреть, возможно id корпуса не нужен
+        /// <summary>
+        /// Удалить этаж корпуса
+        /// </summary>
+        /// <param name="corpsId">ID корпуса</param>
+        /// <param name="floorId">ID этажа</param>
         [HttpDelete("{corpsId}/floors/{floorId}")]
         public async Task DeleteFloor(int corpsId, int floorId)
         {

@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
 {
+    /// <summary>
+    /// Базовая реализация сервиса
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности, с которой работает сервис</typeparam>
     public class BaseService<TEntity> : IBaseCRUDService<TEntity> where TEntity : BaseModel
     {
         public BaseService(IUnitOfWork unitOfWork, IMapper mapper)

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models.Enums;
+﻿using HotelDashboard.Data.Models.Enums;
+using System;
 
 namespace HotelDashboard.Data.Models
 {

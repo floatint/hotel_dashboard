@@ -4,7 +4,6 @@ using HotelDashboard.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
@@ -26,7 +25,8 @@ namespace HotelDashboard.Services.Services
             if (corps == null)
             {
                 throw new ArgumentOutOfRangeException();
-            } else
+            }
+            else
             {
                 return mapper.Map<IEnumerable<TDtoEntity>>(corps.Floors);
             }
@@ -38,7 +38,8 @@ namespace HotelDashboard.Services.Services
             if (corps == null)
             {
                 throw new ArgumentOutOfRangeException();
-            } else
+            }
+            else
             {
                 Floor floor = new Floor();
                 corps.Floors.Add(floor);

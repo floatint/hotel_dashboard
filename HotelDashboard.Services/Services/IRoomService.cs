@@ -1,7 +1,6 @@
 ﻿using HotelDashboard.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
@@ -19,9 +18,10 @@ namespace HotelDashboard.Services.Services
         /// <param name="reserveEnd">Дата окончания резервирования</param>
         Task ReserveRoomAsync(int roomId, DateTime reserveStart, DateTime reserveEnd);
         /// <summary>
-        /// Заселить клиентов к комнату
+        /// Заселить клиентов в комнату
         /// </summary>
         /// <typeparam name="TDtoEntity">Тип DTO сущности клиента</typeparam>
+        /// <param name="roomId">ID комнаты</param>
         /// <param name="clients">Заселяющиеся клиенты</param>
         Task PopulateRoomAsync<TDtoEntity>(int roomId, IEnumerable<TDtoEntity> clients);
         /// <summary>
@@ -29,5 +29,11 @@ namespace HotelDashboard.Services.Services
         /// </summary>
         /// <param name="roomId">ID комнаты</param>
         Task FreeRoom(int roomId);
+        /// <summary>
+        /// Получить детальную информацию о комнате
+        /// </summary>
+        /// <typeparam name="TDtoEntity">Тип DTO комнаты</typeparam>
+        /// <param name="roomId">ID комнаты</param>
+        Task<TDtoEntity> GetRoomInfoAsync<TDtoEntity>(int roomId);
     }
 }

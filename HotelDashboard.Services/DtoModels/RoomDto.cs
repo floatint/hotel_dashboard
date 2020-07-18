@@ -1,20 +1,21 @@
 ﻿using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using HotelDashboard.Services.DtoModels.Enums;
 
 namespace HotelDashboard.Services.DtoModels
 {
     /// <summary>
     /// Общая информация о комнате
     /// </summary>
-    public class RoomView : BaseModel
+    public class RoomDto : BaseModel
     {
+        /// <summary>
+        /// Тип комнаты
+        /// </summary>
         public RoomType Type { set; get; }
         /// <summary>
-        /// Комната свободна для резервирования или заселения
+        /// Состояние комнаты
         /// </summary>
-        public bool IsFree { set; get; }
+        public RoomState State { set; get; }
     }
 }

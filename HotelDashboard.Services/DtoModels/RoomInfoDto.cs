@@ -5,11 +5,12 @@ using System.Text;
 namespace HotelDashboard.Services.DtoModels
 {
     /// <summary>
-    /// Данные для резервирования комнаты
+    /// Информация о комнате
     /// </summary>
-    public class ReserveData
+    public class RoomInfoDto
     {
         public DateTime ReserveStart { set; get; }
         public DateTime ReserveEnd { set; get; }
+        public IEnumerable<ClientDto> Clients { set; get; }
     }
 }

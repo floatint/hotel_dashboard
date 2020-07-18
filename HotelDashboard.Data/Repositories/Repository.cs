@@ -1,10 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelDashboard.Data.Repositories
 {
@@ -21,7 +17,7 @@ namespace HotelDashboard.Data.Repositories
 
         public virtual void Delete(TEntity entity)
         {
-            //если сущность пришла из другого контекста
+            // если сущность пришла из другого контекста
             if (context.Entry(entity).State == EntityState.Detached)
             {
                 dbSet.Attach(entity);

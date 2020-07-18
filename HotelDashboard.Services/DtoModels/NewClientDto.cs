@@ -1,14 +1,12 @@
 ﻿using HotelDashboard.Data.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelDashboard.Services.DtoModels
 {
     /// <summary>
     /// Информация о новом пользователе
     /// </summary>
-    public class NewClient
+    public class NewClientDto
     {
         /// <summary>
         /// Имя

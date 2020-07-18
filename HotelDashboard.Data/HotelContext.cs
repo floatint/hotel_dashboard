@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
+﻿using HotelDashboard.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelDashboard.Data
 {
@@ -37,7 +29,7 @@ namespace HotelDashboard.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //заполняем базу
+            // заполняем базу
             SetPresetData(modelBuilder);
         }
 
@@ -47,13 +39,13 @@ namespace HotelDashboard.Data
         /// <param name="modelBuilder">Билдер модели БД</param>
         private void SetPresetData(ModelBuilder modelBuilder)
         {
-            //Корпусы
+            // Корпусы
             modelBuilder.Entity<Corps>()
                 .HasData(PresetCorpses());
-            //Этажи
+            // Этажи
             modelBuilder.Entity<Floor>()
                 .HasData(PresetFloors());
-            //Комнаты
+            // Комнаты
             modelBuilder.Entity<Room>()
                 .HasData(PresetRooms());
         }
@@ -100,16 +92,16 @@ namespace HotelDashboard.Data
         /// </summary>
         private Room[] PresetRooms()
         {
-            //считаем общее кол-во комнат
+            // считаем общее кол-во комнат
             int roomsCount = (PRESET_SINGLE_ROOM_COUNT +
                               PRESET_DOUBLE_ROOM_COUNT +
                               PRESET_FAMILY_ROOM_COUNT) * (PRESET_CORPS_COUNT * PRESET_FLOORS_COUNT);
-            
+
             Room[] rooms = new Room[roomsCount];
             int roomIndex = 0;
             for (int floorId = 1; floorId <= (PRESET_CORPS_COUNT * PRESET_FLOORS_COUNT); floorId++)
             {
-                //однокомнатные
+                // однокомнатные
                 for (int _ = 0; _ < PRESET_SINGLE_ROOM_COUNT; _++)
                 {
                     rooms[roomIndex] = new Room
@@ -119,7 +111,7 @@ namespace HotelDashboard.Data
                         Type = Models.Enums.RoomType.Single
                     };
                 }
-                //двухкомнатные
+                // двухкомнатные
                 for (int _ = 0; _ < PRESET_DOUBLE_ROOM_COUNT; _++)
                 {
                     rooms[roomIndex] = new Room
@@ -129,7 +121,7 @@ namespace HotelDashboard.Data
                         Type = Models.Enums.RoomType.Double
                     };
                 }
-                //семейные
+                // семейные
                 for (int _ = 0; _ < PRESET_FAMILY_ROOM_COUNT; _++)
                 {
                     rooms[roomIndex] = new Room
