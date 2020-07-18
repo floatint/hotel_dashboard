@@ -1,4 +1,5 @@
 ﻿using HotelDashboard.Services.DtoModels;
+using HotelDashboard.WPFClient.Data.Contents;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,6 +55,12 @@ namespace HotelDashboard.WPFClient.Data
         {
             Uri roomInfo = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/info", roomId), UriKind.Relative));
             return _httpProvider.Get<TRoomInfoDto>(roomInfo);
+        }
+
+        public void ReserveRoom<TReservationData>(int roomId, TReservationData reservationData)
+        {
+            Uri reservationUri = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/reserve", roomId), UriKind.Relative));
+            _httpProvider.Update<TReservationData, object>(reservationUri, reservationData);
         }
 
         // базовый адрес api
