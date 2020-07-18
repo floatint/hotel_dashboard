@@ -50,6 +50,12 @@ namespace HotelDashboard.WPFClient.Data
             return _httpProvider.Get<IEnumerable<TRoomDto>>(floorRooms);
         }
 
+        public TRoomInfoDto GetRoomInfo<TRoomInfoDto>(int roomId)
+        {
+            Uri roomInfo = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/info", roomId), UriKind.Relative));
+            return _httpProvider.Get<TRoomInfoDto>(roomInfo);
+        }
+
         // базовый адрес api
         private readonly Uri _baseApiUri;
         private readonly IDataProvider _httpProvider;
