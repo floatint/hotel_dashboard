@@ -1,0 +1,28 @@
+﻿<Window x:Class="HotelDashboard.WPFClient.Views.Dialogs.ReservationDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views.Dialogs"
+        xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels.Dialogs"
+        mc:Ignorable="d"
+        Title="Резервирование" Height="200" Width="300">
+    <Window.DataContext>
+        <vm:ReservationDialogViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Дата резервирования:" FontSize="16"/>
+            <DatePicker FontSize="16" IsDropDownOpen="False" SelectedDateFormat="Short" SelectedDate="{Binding StartDate}"/>
+            <TextBlock Text="Дата окончания резервирования:" FontSize="16"/>
+            <DatePicker FontSize="16" IsDropDownOpen="False" SelectedDateFormat="Short" SelectedDate="{Binding EndDate}"/>
+            <Button Width="100" 
+                    Height="30" 
+                    Content="Сохранить" 
+                    Margin="0, 10, 0, 0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding OnOkCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+        </StackPanel>
+    </Grid>
+</Window>
