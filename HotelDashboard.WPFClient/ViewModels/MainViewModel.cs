@@ -186,7 +186,7 @@ namespace HotelDashboard.WPFClient.ViewModels
             OnRoomReservation = new BaseCommand((_) =>
             {
                 // показываем диалог резервирования
-                object result = _dialogService.InputDialog<ReservationDialogView, ReservationDialogViewModel>("Резервирование");
+                object result = _dialogService.InputDialog<ReservationDialogView, ReservationDialogViewModel>("Резерви");
                 if (result != null)
                 {
                     // обращаемся к модели

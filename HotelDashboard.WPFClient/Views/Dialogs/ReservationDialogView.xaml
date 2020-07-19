@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views.Dialogs"
         xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels.Dialogs"
         mc:Ignorable="d"
-        Title="Резервирование" Height="200" Width="300">
+        Title="{Binding Title}" Height="200" Width="300">
     <Window.DataContext>
         <vm:ReservationDialogViewModel/>
     </Window.DataContext>

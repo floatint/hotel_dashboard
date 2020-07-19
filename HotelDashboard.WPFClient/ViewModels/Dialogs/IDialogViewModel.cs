@@ -9,6 +9,7 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
     /// </summary>
     interface IDialogViewModel
     {
+        string Title { set;  get; }
         /// <summary>
         /// Результат диалога
         /// </summary>

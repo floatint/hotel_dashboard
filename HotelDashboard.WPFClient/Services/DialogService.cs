@@ -20,6 +20,7 @@ namespace HotelDashboard.WPFClient.Services
             TViewModel viewModel = new TViewModel();
             TView view = new TView();
             // подключение логики
+            viewModel.Title = title;
             view.DataContext = viewModel;
             // показываем диалог и возвращаем введенные данные
             view.ShowDialog();
