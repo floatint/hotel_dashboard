@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelDashboard.WPFClient.Models
+namespace HotelDashboard.WPFClient.Models.Dialogs
 {
     /// <summary>
     /// Модель диалога резервирования

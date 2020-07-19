@@ -1,5 +1,5 @@
 ﻿using HotelDashboard.Services.DtoModels;
-using HotelDashboard.WPFClient.Models;
+using HotelDashboard.WPFClient.Models.Dialogs;
 using HotelDashboard.WPFClient.Services;
 using HotelDashboard.WPFClient.ViewModels.Commands;
 using System;
