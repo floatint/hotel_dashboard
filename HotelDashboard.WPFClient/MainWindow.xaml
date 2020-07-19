@@ -191,7 +191,19 @@
                                        FontSize="14"/>
                             
                             <!-- Управление -->
-
+                            <StackPanel Orientation="Horizontal" 
+                                        HorizontalAlignment="Center"
+                                        Margin="0, 5, 0, 0">
+                                <Button Content="Заселить"
+                                        Width="100"
+                                        Height="50"
+                                        Margin="0, 0, 5, 0"
+                                        Command="{Binding OnRoomPopulation}"/>
+                                <Button Content="Освободить"
+                                        Width="100"
+                                        Height="50"
+                                        Command="{Binding OnRoomFree}"/>
+                            </StackPanel>
 
                         </StackPanel>
                         

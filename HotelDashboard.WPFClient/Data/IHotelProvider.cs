@@ -40,5 +40,10 @@ namespace HotelDashboard.WPFClient.Data
         /// <param name="roomId">ID комнаты</param>
         /// <param name="reservationData">Данные для резервирования</param>
         void ReserveRoom<TReservationData>(int roomId, TReservationData reservationData);
+        /// <summary>
+        /// Освободить комнату
+        /// </summary>
+        /// <param name="roomId"></param>
+        void FreeRoom(int roomId);
     }
 }

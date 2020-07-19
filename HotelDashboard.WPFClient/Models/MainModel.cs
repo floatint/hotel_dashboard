@@ -52,9 +52,23 @@ namespace HotelDashboard.WPFClient.Models
             return _hotelProvider.GetRoomInfo<RoomInfoDto>(roomDto.Id);
         }
 
+        /// <summary>
+        /// Зарезервировать комнату
+        /// </summary>
+        /// <param name="roomDto">DTO комнаты</param>
+        /// <param name="reserveDataDto">Данные резервирования</param>
         public void ReserveRoom(RoomDto roomDto, ReserveDataDto reserveDataDto)
         {
-            _hotelProvider.ReserveRoom<ReserveDataDto>(roomDto.Id, reserveDataDto);
+            _hotelProvider.ReserveRoom(roomDto.Id, reserveDataDto);
+        }
+
+        /// <summary>
+        /// Освободить комнату
+        /// </summary>
+        /// <param name="roomDto">DTO комнаты</param>
+        public void FreeRoom(RoomDto roomDto)
+        {
+            _hotelProvider.FreeRoom(roomDto.Id);
         }
 
         public MainModel()

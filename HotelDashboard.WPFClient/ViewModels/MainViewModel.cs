@@ -24,6 +24,9 @@ namespace HotelDashboard.WPFClient.ViewModels
     class MainViewModel : BaseViewModel
     {
 
+        /// <summary>
+        /// Корпусы
+        /// </summary>
         public ObservableCollection<CorpsDto> Coprs
         {
 
@@ -33,6 +36,9 @@ namespace HotelDashboard.WPFClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Этажи
+        /// </summary>
         public ObservableCollection<FloorDto> Floors
         {
             set
@@ -46,6 +52,9 @@ namespace HotelDashboard.WPFClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Комнаты
+        /// </summary>
         public ObservableCollection<RoomDto> Rooms
         {
             set
@@ -126,6 +135,29 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// Комманда заселения комнаты
         /// </summary>
         public BaseCommand OnRoomPopulation { get; }
+        /// <summary>
+        /// Комманда освобождения комнаты
+        /// </summary>
+        public BaseCommand OnRoomFree  => new BaseCommand((_) => {
+            // пытаемся освободить комнату
+            try
+            {
+                _model.FreeRoom(SelectedRoom);
+            }
+            catch(Exception ex)
+            {
+                _dialogService.ShowMessage("Ошибка", ex.ToString());
+                return;
+            }
+            // обновляем статус на клиентской стороне
+            _selectedRoom.State = RoomState.Free;
+            _selectedRoomInfo = new RoomInfoDto();
+            // просим ui перерисовать
+            CollectionViewSource.GetDefaultView(Rooms).Refresh();
+            OnPropertyChanged(nameof(SelectedRoom));
+            OnPropertyChanged(nameof(SelectedRoomInfo));
+            
+        });
 
         public MainViewModel()
         {
