@@ -114,22 +114,59 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// <summary>
         /// Комманда выбора корпуса
         /// </summary>
-        public BaseCommand OnSelectCorps { get; }
+        public BaseCommand OnSelectCorps => new BaseCommand(o => {
+            SelectedRoom = null;
+            Floors = _model.GetCorpsFloors((CorpsDto)o);
+        });
 
         /// <summary>
         /// Комманда выбора этажа
         /// </summary>
-        public BaseCommand OnSelectFloor { get; }
+        public BaseCommand OnSelectFloor => new BaseCommand(o =>
+        {
+            SelectedRoom = null;
+            Rooms = _model.GetFloorRooms((FloorDto)o);
+        });
 
         /// <summary>
         /// Комманда выбора комнаты
         /// </summary>
-        public BaseCommand OnSelectRoom { get; }
+        public BaseCommand OnSelectRoom => new BaseCommand(o =>
+        {
+            SelectedRoom = (RoomDto)o;
+        });
 
         /// <summary>
         /// Комманда резервирования комнаты
         /// </summary>
-        public BaseCommand OnRoomReservation { get; }
+        public BaseCommand OnRoomReservation => new BaseCommand((_) =>
+        {
+            // показываем диалог резервирования
+            object result = _dialogService.InputDialog<ReservationDialogView, ReservationDialogViewModel>("Резервирование");
+            if (result != null)
+            {
+                // обращаемся к модели
+                try
+                {
+                    _model.ReserveRoom(_selectedRoom, (ReserveDataDto)result);
+                }
+                catch (Exception ex)
+                {
+                    _dialogService.ShowMessage("Ошибка", ex.ToString());
+                    return;
+                }
+                // успешно зарезервировали, обновляем свойства на клиентской стороне
+                _selectedRoom.State = RoomState.Reserved;
+                // т.к. RoomDto не отслеживает INotifyPropertyChanged, то приходится использовать это
+                CollectionViewSource.GetDefaultView(Rooms).Refresh();
+                // заполним информацию о текущей выбранной комнате
+                ReserveDataDto reserveDataDto = result as ReserveDataDto;
+                _selectedRoomInfo.ReserveStart = reserveDataDto.ReserveStart;
+                _selectedRoomInfo.ReserveEnd = reserveDataDto.ReserveEnd;
+                // просим обновить UI
+                OnPropertyChanged(nameof(SelectedRoomInfo));
+            }
+        });
 
         /// <summary>
         /// Комманда заселения комнаты
@@ -163,59 +200,6 @@ namespace HotelDashboard.WPFClient.ViewModels
         {
             // инициализация сервиса диалогов
             _dialogService = new DialogService();
-
-            // иницализация логики
-
-            OnSelectCorps = new BaseCommand(o =>
-            {
-                SelectedRoom = null;
-                Floors = _model.GetCorpsFloors((CorpsDto)o);
-            });
-
-            OnSelectFloor = new BaseCommand(o =>
-            {
-                SelectedRoom = null;
-                Rooms = _model.GetFloorRooms((FloorDto)o);
-            });
-
-            OnSelectRoom = new BaseCommand(o =>
-            {
-                SelectedRoom = (RoomDto)o;
-            });
-
-            OnRoomReservation = new BaseCommand((_) =>
-            {
-                // показываем диалог резервирования
-                object result = _dialogService.InputDialog<ReservationDialogView, ReservationDialogViewModel>("Резерви");
-                if (result != null)
-                {
-                    // обращаемся к модели
-                    try
-                    {
-                        _model.ReserveRoom(_selectedRoom, (ReserveDataDto)result);
-                    }
-                    catch(Exception ex)
-                    {
-                        _dialogService.ShowMessage("Ошибка", ex.ToString());
-                        return;
-                    }
-                    // успешно зарезервировали, обновляем свойства на клиентской стороне
-                    _selectedRoom.State = RoomState.Reserved;
-                    // т.к. RoomDto не отслеживает INotifyPropertyChanged, то приходится использовать это
-                    CollectionViewSource.GetDefaultView(Rooms).Refresh();
-                    // заполним информацию о текущей выбранной комнате
-                    ReserveDataDto reserveDataDto = result as ReserveDataDto;
-                    _selectedRoomInfo.ReserveStart = reserveDataDto.ReserveStart;
-                    _selectedRoomInfo.ReserveEnd = reserveDataDto.ReserveEnd;
-                    // просим обновить UI
-                    OnPropertyChanged(nameof(SelectedRoomInfo));
-                }
-            });
-
-            OnRoomPopulation = new BaseCommand((_) =>
-            {
-
-            });
         }
 
         private readonly MainModel _model = new MainModel();

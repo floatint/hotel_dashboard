@@ -59,9 +59,26 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
         }
 
         /// <summary>
-        /// Подтверждение резервирования
+        /// Подтверждение резервирования. На вход должен получить класс Window, чтобы закрыть диалог.
         /// </summary>
-        public BaseCommand OnOkCommand { get; }
+        public BaseCommand OnOkCommand => new BaseCommand((o) =>
+        {
+            if (_model.IsValid(_startDate, _endDate))
+            {
+                _dialogResult = new ReserveDataDto
+                {
+                    ReserveStart = StartDate.Date,
+                    ReserveEnd = EndDate.Date
+                };
+            }
+            else
+            {
+                _dialogService.ShowMessage("Ошибка", "Введите корректные даты резервирования");
+                return;
+            }
+                // закрываем диалог
+                ((Window)o).Close();
+        });
 
         public ReservationDialogViewModel()
         {
@@ -71,34 +88,13 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
             // установим начальные значения
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date;
-            
-            // инициализируем логику 
-
-            OnOkCommand = new BaseCommand((o) =>
-            {
-                if (_model.IsValid(_startDate, _endDate))
-                {
-                    _dialogResult = new ReserveDataDto
-                    {
-                        ReserveStart = StartDate.Date,
-                        ReserveEnd = EndDate.Date
-                    };
-                }
-                else
-                {
-                    _dialogService.ShowMessage("Ошибка", "Введите корректные даты резервирования");
-                    return;
-                }
-                // закрываем диалог
-                ((Window)o).Close();
-            });
         }
 
         private DateTime _startDate;
         private DateTime _endDate;
         private ReservationDialogModel _model;
         private IDialogService _dialogService;
-        private object _dialogResult;
+        private ReserveDataDto _dialogResult;
         private string _title;
     }
 }
