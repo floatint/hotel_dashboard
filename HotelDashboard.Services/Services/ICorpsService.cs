@@ -24,8 +24,7 @@ namespace HotelDashboard.Services.Services
         /// <summary>
         /// Удалить этаж из корпуса
         /// </summary>
-        /// <param name="corpsId">ID корпуса</param>
         /// <param name="floorId">ID этажа</param>
-        Task DeleteFloorAsync(int corpsId, int floorId);
+        Task DeleteFloorAsync(int floorId);
     }
 }
