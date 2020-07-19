@@ -27,5 +27,18 @@ namespace HotelDashboard.WPFClient.Data
         /// <typeparam name="TRoomDto">Тип DTO комнаты</typeparam>
         /// <param name="floorId">ID этажа</param>
         IEnumerable<TRoomDto> GetFloorRooms<TRoomDto>(int floorId);
+        /// <summary>
+        /// Получить информацию о комнате
+        /// </summary>
+        /// <typeparam name="TRoomInfoDto">Тип DTO информации о комнате</typeparam>
+        /// <param name="roomId">ID комнаты</param>
+        TRoomInfoDto GetRoomInfo<TRoomInfoDto>(int roomId);
+        /// <summary>
+        /// Резервирование комнаты
+        /// </summary>
+        /// <typeparam name="TReservationData">Тип данных для резервирования</typeparam>
+        /// <param name="roomId">ID комнаты</param>
+        /// <param name="reservationData">Данные для резервирования</param>
+        void ReserveRoom<TReservationData>(int roomId, TReservationData reservationData);
     }
 }

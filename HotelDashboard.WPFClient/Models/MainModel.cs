@@ -27,15 +27,34 @@ namespace HotelDashboard.WPFClient.Models
         /// <summary>
         /// Получить этажи заданного корпуса
         /// </summary>
-        /// <param name="corps">Информация о корпусе</param>
-        public ObservableCollection<FloorDto> GetCorpsFloors(CorpsDto corps)
+        /// <param name="corpsDto">Информация о корпусе</param>
+        public ObservableCollection<FloorDto> GetCorpsFloors(CorpsDto corpsDto)
         {
-            return new ObservableCollection<FloorDto>(_hotelProvider.GetCorpsFloors<FloorDto>(corps.Id));
+            return new ObservableCollection<FloorDto>(_hotelProvider.GetCorpsFloors<FloorDto>(corpsDto.Id));
         }
 
-        public ObservableCollection<RoomDto> GetFloorRooms(FloorDto floor)
+        /// <summary>
+        /// Получить комнаты на этаже
+        /// </summary>
+        /// <param name="floorDto">Информация об этаже</param>
+        public ObservableCollection<RoomDto> GetFloorRooms(FloorDto floorDto)
         {
-            return new ObservableCollection<RoomDto>(_hotelProvider.GetFloorRooms<RoomDto>(floor.Id));
+            return new ObservableCollection<RoomDto>(_hotelProvider.GetFloorRooms<RoomDto>(floorDto.Id));
+        }
+
+        /// <summary>
+        /// Получить развернутую информацию о комнате
+        /// </summary>
+        /// <param name="roomDto">Базовая информация о комнате</param>
+        /// <returns></returns>
+        public RoomInfoDto GetRoomInfo(RoomDto roomDto)
+        {
+            return _hotelProvider.GetRoomInfo<RoomInfoDto>(roomDto.Id);
+        }
+
+        public void ReserveRoom(RoomDto roomDto, ReserveDataDto reserveDataDto)
+        {
+            _hotelProvider.ReserveRoom<ReserveDataDto>(roomDto.Id, reserveDataDto);
         }
 
         public MainModel()
