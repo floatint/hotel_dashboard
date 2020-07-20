@@ -14,9 +14,27 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
     /// <summary>
     /// ViewModel диалога резервирования комнаты
     /// </summary>
-    class ReservationDialogViewModel : BaseViewModel, IDialogViewModel
+    class DateInputDialogViewModel : BaseViewModel, IDialogViewModel
     {
         public object Result => _dialogResult;
+
+        public object[] Data
+        {
+            set
+            {
+                // если в диалог не были переданы заголовки для полей ввода
+                if (value == null || value.Length < 2)
+                {
+                    throw new ArgumentException($"Неверное свойство {nameof(Data)} для диалога {nameof(DateInputDialogViewModel)}");
+                }
+                _data = value;
+                OnPropertyChanged(nameof(Data));
+            }
+            get
+            {
+                return _data;
+            }
+        }
 
         public string Title
         {
@@ -28,6 +46,22 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
             get
             {
                 return _title;
+            }
+        }
+
+        public string StartDateTitle
+        {
+            get
+            {
+                return Data[0].ToString();
+            }
+        }
+
+        public string EndDateTitle
+        {
+            get
+            {
+                return Data[1].ToString();
             }
         }
 
@@ -80,9 +114,9 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
                 ((Window)o).Close();
         });
 
-        public ReservationDialogViewModel()
+        public DateInputDialogViewModel()
         {
-            _model = new ReservationDialogModel();
+            _model = new DateInputDialogModel();
             _dialogService = new DialogService();
 
             // установим начальные значения
@@ -92,9 +126,10 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 
         private DateTime _startDate;
         private DateTime _endDate;
-        private ReservationDialogModel _model;
+        private DateInputDialogModel _model;
         private IDialogService _dialogService;
         private ReserveDataDto _dialogResult;
         private string _title;
+        private object[] _data;
     }
 }

@@ -5,16 +5,16 @@ using System.Text;
 namespace HotelDashboard.WPFClient.Models.Dialogs
 {
     /// <summary>
-    /// Модель диалога резервирования
+    /// Модель диалога ввода дат
     /// </summary>
-    class ReservationDialogModel
+    class DateInputDialogModel
     {
 
         /// <summary>
         /// Валидация дат
         /// </summary>
-        /// <param name="startDate">Дата резервирования</param>
-        /// <param name="endDate">Дата окончания резервирования</param>
+        /// <param name="startDate">Начальная дата</param>
+        /// <param name="endDate">Конечная дата</param>
         public bool IsValid(DateTime startDate, DateTime endDate)
         {
             if (startDate.CompareTo(DateTime.Now.Date) < 0)

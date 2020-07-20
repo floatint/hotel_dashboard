@@ -24,7 +24,7 @@ namespace HotelDashboard.WPFClient.Services
         /// <typeparam name="TView">Тип представления</typeparam>
         /// <typeparam name="TViewModel">Тип логики представления</typeparam>
         /// <param name="title">Заголовок</param>
-        object InputDialog<TView, TViewModel>(string title) where TViewModel : BaseViewModel, IDialogViewModel, new()
+        object InputDialog<TView, TViewModel>(string title, object[] data) where TViewModel : BaseViewModel, IDialogViewModel, new()
                                                             where TView : Window, new();
     }
 }
