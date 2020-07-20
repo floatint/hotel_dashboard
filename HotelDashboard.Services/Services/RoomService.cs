@@ -51,7 +51,7 @@ namespace HotelDashboard.Services.Services
             }
         }
 
-        public async Task PopulateRoomAsync<TDtoEntity>(int roomId, IEnumerable<TDtoEntity> clients)
+        public async Task PopulateRoomAsync<TDtoEntity>(int roomId, TDtoEntity populationDto)
         {
             // получаем комнату
             Room room = await repository.GetByIdAsync(roomId);
@@ -63,14 +63,42 @@ namespace HotelDashboard.Services.Services
             }
             else
             {
+                ReserveDataDto reserveDataDto = mapper.Map<ReserveDataDto>(populationDto);
+                RoomStatus roomStatus = null;
+                // проверим, была ли комната зарезервирована
+                if (room.Status != null)
+                {
+                    // запись уже есть, значит обновим ее под период проживания
+                    roomStatus = room.Status;
+                    roomStatus.ReserveStart = reserveDataDto.ReserveStart;
+                    roomStatus.ReserveEnd = reserveDataDto.ReserveEnd;
+                    //обновляем
+                    _roomStatusRepository.Update(roomStatus);
+                }
+                else
+                {
+                    // добавим новую запись
+                    roomStatus = new RoomStatus
+                    {
+                        RoomId = roomId,
+                        ReserveStart = reserveDataDto.ReserveStart,
+                        ReserveEnd = reserveDataDto.ReserveEnd
+                    };
+                    //добавляем
+                    _roomStatusRepository.Insert(roomStatus);
+                }
+                // сохраним запись о проживании
+                await unitOfWork.SaveAsync();
+
+                // теперь идем по клиентам
                 // маппинг в доменные модели клиентов
-                IEnumerable<Client> domainClients = mapper.Map<IEnumerable<Client>>(clients);
+                IEnumerable<Client> domainClients = mapper.Map<IEnumerable<Client>>(
+                    mapper.Map<ClientsEnumerableDto>(populationDto).ClientsEnumerable);
 
                 // заселяем клиентов
-                // полагаем, что status != null
                 foreach (var client in domainClients)
                 {
-                    client.RoomStatusId = room.Status.Id;
+                    client.RoomStatusId = roomStatus.Id;
                     _clientRepository.Insert(client);
                 }
                 // сохраняем контекст

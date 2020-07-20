@@ -65,8 +65,14 @@ namespace HotelDashboard.WPFClient.Data
 
         public void FreeRoom(int roomId)
         {
-            Uri freeRooom = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/free", roomId), UriKind.Relative));
-            _httpProvider.Update<object, object>(freeRooom, null);
+            Uri freeRoom = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/free", roomId), UriKind.Relative));
+            _httpProvider.Update<object, object>(freeRoom, null);
+        }
+
+        public void PopulateRoom<TPopulationData>(int roomId, TPopulationData populationData)
+        {
+            Uri populateRoom = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/populate", roomId), UriKind.Relative));
+            _httpProvider.Update<TPopulationData, object>(populateRoom, populationData);
         }
 
         // базовый адрес api

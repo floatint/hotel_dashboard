@@ -109,8 +109,6 @@ namespace HotelDashboard.WPFClient.ViewModels
             }
         }
 
-
-
         /// <summary>
         /// Комманда выбора корпуса
         /// </summary>
@@ -126,6 +124,7 @@ namespace HotelDashboard.WPFClient.ViewModels
         {
             SelectedRoom = null;
             Rooms = _model.GetFloorRooms((FloorDto)o);
+            var a = 0;
         });
 
         /// <summary>
@@ -141,8 +140,21 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// </summary>
         public BaseCommand OnRoomReservation => new BaseCommand((_) =>
         {
-            // показываем диалог резервирования
-            object result = _dialogService.InputDialog<ReservationDialogView, ReservationDialogViewModel>("Резервирование");
+            // объявляем надписи диалога
+            object[] fieldTitles = new object[2] { "Дата резервирования:", "Дата окончания резервирования:" };
+            // пытаемся получить данные для резервирования
+            ReserveDataDto result = null;
+            try
+            {
+                result = (ReserveDataDto)_dialogService.InputDialog<DateInputDialogView, DateInputDialogViewModel>("Резервирование", fieldTitles);
+            }catch(Exception ex)
+            {
+                // нет смысла писать всю информацию
+                _dialogService.ShowMessage("Ошибка", ex.Message);
+                return;
+            }
+
+            // если данных введены
             if (result != null)
             {
                 // обращаемся к модели
@@ -152,6 +164,7 @@ namespace HotelDashboard.WPFClient.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    // нужна вся информация
                     _dialogService.ShowMessage("Ошибка", ex.ToString());
                     return;
                 }
@@ -160,9 +173,8 @@ namespace HotelDashboard.WPFClient.ViewModels
                 // т.к. RoomDto не отслеживает INotifyPropertyChanged, то приходится использовать это
                 CollectionViewSource.GetDefaultView(Rooms).Refresh();
                 // заполним информацию о текущей выбранной комнате
-                ReserveDataDto reserveDataDto = result as ReserveDataDto;
-                _selectedRoomInfo.ReserveStart = reserveDataDto.ReserveStart;
-                _selectedRoomInfo.ReserveEnd = reserveDataDto.ReserveEnd;
+                _selectedRoomInfo.ReserveStart = result.ReserveStart;
+                _selectedRoomInfo.ReserveEnd = result.ReserveEnd;
                 // просим обновить UI
                 OnPropertyChanged(nameof(SelectedRoomInfo));
             }
@@ -171,7 +183,86 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// <summary>
         /// Комманда заселения комнаты
         /// </summary>
-        public BaseCommand OnRoomPopulation { get; }
+        public BaseCommand OnRoomPopulation => new BaseCommand((_) => {
+
+            // данные о времени проживания
+            ReserveDataDto reserveDataDto = null;
+            // клиенты
+            List<NewClientDto> clients = new List<NewClientDto>();
+
+            // надписи для полей ввода
+            object[] fieldTitles = new object[] { "Дата заселения:", "Дата окончания проживания:" };
+            // пробуем получить время проживания
+            try
+            {
+                reserveDataDto = (ReserveDataDto)_dialogService.InputDialog<DateInputDialogView, DateInputDialogViewModel>("Период проживания", fieldTitles);
+            }
+            catch(Exception ex)
+            {
+                _dialogService.ShowMessage("Ошибка", ex.Message);
+                return;
+            }
+
+            // если данные введены
+            if (reserveDataDto != null)
+            {
+                // начинаем ввод клиентов
+                // пытаемся заполнить всю комнату
+                for (int i = 1; i <= (int)SelectedRoom.Type; i++)
+                {
+                    string title = string.Format("Информация о клиенте №{0}", i);
+                    NewClientDto clientDto = (NewClientDto)_dialogService.InputDialog<ClientInfoDialogView, ClientInfoDialogViewModel>(title, null);
+                    if (clientDto != null)
+                    {
+                        clients.Add(clientDto);
+                    }
+                    else
+                    {
+                        // если пользователь не захотел вводить, то заканчиваем
+                        break;
+                    }
+                }
+
+                // смотрим, сколько клиентов ввели
+                if (clients.Count != 0)
+                {
+                    // формируем данные для отправки в модель
+                    PopulationDto populationDto = new PopulationDto
+                    {
+                        Clients = new ClientsEnumerableDto {
+                            ClientsEnumerable = clients.AsEnumerable()
+                        },
+                        ReserveData = reserveDataDto
+                    };
+                    // отправляем
+                    try
+                    {
+                        _model.PopulateRoom(SelectedRoom, populationDto);
+                    }
+                    catch (Exception ex)
+                    {
+                        _dialogService.ShowMessage("Ошибка", ex.ToString());
+                        return;
+                    }
+
+                    // если отправка прошла успешно, то обновляем клиентскую часть
+                    _selectedRoom.State = RoomState.Populated;
+                    CollectionViewSource.GetDefaultView(Rooms).Refresh();
+                    // 
+                }
+                else
+                {
+                    // просто выйдем
+                    return;
+                }
+            }
+            else
+            {
+                // просто выйдем
+                return;
+            }
+        });
+
         /// <summary>
         /// Комманда освобождения комнаты
         /// </summary>

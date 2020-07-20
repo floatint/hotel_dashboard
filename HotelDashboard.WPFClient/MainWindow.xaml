@@ -8,7 +8,7 @@
         xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
         xmlns:services="clr-namespace:HotelDashboard.Services.DtoModels.Enums;assembly=HotelDashboard.Services"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600">
+        Title="Гостинница" Height="600" Width="600">
     <!-- Ресурсы окна -->
     <Window.Resources>
         <!-- Конвертеры -->

@@ -71,11 +71,16 @@ namespace HotelDashboard.WPFClient.Models
             _hotelProvider.FreeRoom(roomDto.Id);
         }
 
-        public MainModel()
+        /// <summary>
+        /// Заселить комнату
+        /// </summary>
+        /// <param name="roomDto">DTO комнаты</param>
+        /// <param name="populationDto">Информация для заселения</param>
+        public void PopulateRoom(RoomDto roomDto, PopulationDto populationDto)
         {
-            _hotelProvider = new HotelWebApiProvider();
+            _hotelProvider.PopulateRoom(roomDto.Id, populationDto);
         }
 
-        private readonly IHotelProvider _hotelProvider;
+        private readonly IHotelProvider _hotelProvider = new HotelWebApiProvider();
     }
 }

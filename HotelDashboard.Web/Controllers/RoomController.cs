@@ -1,6 +1,8 @@
 ﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -43,11 +45,19 @@ namespace HotelDashboard.Web.Controllers
         /// Заселить клиентов в комнату
         /// </summary>
         /// <param name="roomId">ID комнаты</param>
-        /// <param name="clients">Клиенты</param>
+        /// <param name="populationDto">Информация для заселения</param>
         [HttpPut("{roomId}/populate")]
-        public async Task PopulateRoomAsync(int roomId, [FromBody] IEnumerable<NewClientDto> clients)
+        public async Task PopulateRoomAsync(int roomId, [FromBody] PopulationDto populationDto)
         {
-            await _service.PopulateRoomAsync(roomId, clients);
+            if (ModelState.IsValid)
+            {
+                await _service.PopulateRoomAsync(roomId, populationDto);
+            }
+            else
+            {
+                throw new Exception("Invalid DTO model");
+            }
+            //await _service.PopulateRoomAsync(roomId, populationDto);
         }
 
         /// <summary>

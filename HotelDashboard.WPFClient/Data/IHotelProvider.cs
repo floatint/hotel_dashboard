@@ -45,5 +45,12 @@ namespace HotelDashboard.WPFClient.Data
         /// </summary>
         /// <param name="roomId"></param>
         void FreeRoom(int roomId);
+        /// <summary>
+        /// Заселить комнату
+        /// </summary>
+        /// <typeparam name="TPopulationData">Тип данных с информацией о клиентах</typeparam>
+        /// <param name="roomId">ID комнаты</param>
+        /// <param name="populationData">Данные клиентов</param>
+        void PopulateRoom<TPopulationData>(int roomId, TPopulationData populationData);
     }
 }
