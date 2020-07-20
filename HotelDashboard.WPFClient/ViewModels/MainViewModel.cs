@@ -32,7 +32,15 @@ namespace HotelDashboard.WPFClient.ViewModels
 
             get
             {
-                return _model.GetCorps();
+                try
+                {
+                    return _model.GetCorps();
+                }catch(Exception ex)
+                {
+                    _dialogService.ShowMessage("Ошибка", ex.ToString());
+                }
+                // по умолчанию
+                return null;
             }
         }
 
@@ -80,7 +88,13 @@ namespace HotelDashboard.WPFClient.ViewModels
                 // подгружаем подробную информацию о комнате, если комната != null
                 if (_selectedRoom != null)
                 {
-                    SelectedRoomInfo = _model.GetRoomInfo(SelectedRoom);
+                    try
+                    {
+                        SelectedRoomInfo = _model.GetRoomInfo(SelectedRoom);
+                    }catch(Exception ex)
+                    {
+                        _dialogService.ShowMessage("Ошибка", ex.ToString());
+                    }
                 }
                 else
                 {
@@ -114,7 +128,14 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// </summary>
         public BaseCommand OnSelectCorps => new BaseCommand(o => {
             SelectedRoom = null;
-            Floors = _model.GetCorpsFloors((CorpsDto)o);
+            Rooms = null;
+            try
+            {
+                Floors = _model.GetCorpsFloors((CorpsDto)o);
+            }catch(Exception ex)
+            {
+                _dialogService.ShowMessage("Ошибка", ex.ToString());
+            }
         });
 
         /// <summary>
@@ -123,8 +144,13 @@ namespace HotelDashboard.WPFClient.ViewModels
         public BaseCommand OnSelectFloor => new BaseCommand(o =>
         {
             SelectedRoom = null;
-            Rooms = _model.GetFloorRooms((FloorDto)o);
-            var a = 0;
+            try
+            {
+                Rooms = _model.GetFloorRooms((FloorDto)o);
+            } catch(Exception ex)
+            {
+                _dialogService.ShowMessage("Ошибка", ex.ToString());
+            }
         });
 
         /// <summary>
@@ -248,7 +274,14 @@ namespace HotelDashboard.WPFClient.ViewModels
                     // если отправка прошла успешно, то обновляем клиентскую часть
                     _selectedRoom.State = RoomState.Populated;
                     CollectionViewSource.GetDefaultView(Rooms).Refresh();
-                    // 
+                    // попробуем перезагрузить информацию о комнате
+                    try
+                    {
+                        SelectedRoomInfo = _model.GetRoomInfo(SelectedRoom);
+                    } catch(Exception ex)
+                    {
+                        _dialogService.ShowMessage("Ошибка", ex.ToString());
+                    }
                 }
                 else
                 {

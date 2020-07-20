@@ -16,17 +16,16 @@ namespace HotelDashboard.WPFClient.Converters
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             RoomState state = (RoomState)parameter;
-
-            switch (state)
+            if (values == null || values[0] == null)
             {
-                case RoomState.Free:
-                    if (values[0] == null)
-                    {
-                        return Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        RoomInfoDto roomInfoDto = values[0] as RoomInfoDto;
+                return Visibility.Collapsed;
+            }
+            else
+            {
+                RoomInfoDto roomInfoDto = values[0] as RoomInfoDto;
+                switch (state)
+                {
+                    case RoomState.Free:
                         if (roomInfoDto.ReserveStart == default && roomInfoDto.ReserveEnd == default)
                         {
                             return Visibility.Visible;
@@ -35,18 +34,26 @@ namespace HotelDashboard.WPFClient.Converters
                         {
                             return Visibility.Collapsed;
                         }
-                    }
-                case RoomState.Reserved:
-                    if (values[0] == null)
-                    {
-                        return Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        RoomInfoDto roomInfoDto = values[0] as RoomInfoDto;
+                    case RoomState.Reserved:
+                            if (roomInfoDto.ReserveStart != default && roomInfoDto.ReserveEnd != default)
+                            {
+                                if (roomInfoDto.Clients == null || roomInfoDto.Clients.Count() == 0)
+                                {
+                                    return Visibility.Visible;
+                                }
+                                else
+                                {
+                                    return Visibility.Collapsed;
+                                }
+                            }
+                            else
+                            {
+                                return Visibility.Collapsed;
+                            }
+                    case RoomState.Populated:
                         if (roomInfoDto.ReserveStart != default && roomInfoDto.ReserveEnd != default)
                         {
-                            if (roomInfoDto.Clients == null || roomInfoDto.Clients.Count() == 0)
+                            if (roomInfoDto.Clients != null && roomInfoDto.Clients.Count() != 0)
                             {
                                 return Visibility.Visible;
                             }
@@ -59,10 +66,10 @@ namespace HotelDashboard.WPFClient.Converters
                         {
                             return Visibility.Collapsed;
                         }
-                    }
-                default:
-                    // по умолчанию не показываем
-                    return Visibility.Collapsed;
+                    default:
+                        // по умолчанию не показываем
+                        return Visibility.Collapsed;
+                }
             }
         }
 
