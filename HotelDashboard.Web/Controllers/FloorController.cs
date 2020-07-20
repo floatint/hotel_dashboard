@@ -1,6 +1,7 @@
 ﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,7 +34,15 @@ namespace HotelDashboard.Web.Controllers
         [HttpPost("{floorId}/rooms")]
         public async Task<RoomDto> AddRoomAsync(int floorId, [FromBody] NewRoomDto dtoRoom)
         {
-            return await _service.AddRoomAsync<RoomDto, NewRoomDto>(floorId, dtoRoom);
+            if (ModelState.IsValid)
+            {
+                return await _service.AddRoomAsync<RoomDto, NewRoomDto>(floorId, dtoRoom);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid DTO model");
+            }
+            
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using HotelDashboard.Data.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace HotelDashboard.Services.DtoModels
 {
@@ -14,14 +15,17 @@ namespace HotelDashboard.Services.DtoModels
         /// <summary>
         /// Имя
         /// </summary>
+        [Required(ErrorMessage = "Имя"), MinLength(1)]
         public string FirstName { set; get; }
         /// <summary>
         /// Фамилия
         /// </summary>
+        [Required(ErrorMessage = "Фамилия"), MinLength(1)]
         public string SecondName { set; get; }
         /// <summary>
         /// Отчество
         /// </summary>
+        [Required(ErrorMessage = "Отчество"), MinLength(1)]
         public string LastName { set; get; }
         /// <summary>
         /// Дата рождения
@@ -34,6 +38,7 @@ namespace HotelDashboard.Services.DtoModels
         /// <summary>
         /// Адрес регистрации
         /// </summary>
+        [Required(ErrorMessage = "Адрес регистрации"), MinLength(1)]
         public string RegistrationAddress { set; get; }
 
     }

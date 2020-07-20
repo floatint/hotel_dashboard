@@ -1,6 +1,7 @@
 ﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,15 @@ namespace HotelDashboard.Web.Controllers
         [HttpPut("{roomId}/reserve")]
         public async Task ReserveRoomAsync(int roomId, [FromBody] ReserveDataDto data)
         {
-            await _service.ReserveRoomAsync(roomId, data.ReserveStart, data.ReserveEnd);
+            if (ModelState.IsValid)
+            {
+                await _service.ReserveRoomAsync(roomId, data.ReserveStart, data.ReserveEnd);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid DTO model");
+            }
+            
         }
 
         /// <summary>
@@ -57,7 +66,6 @@ namespace HotelDashboard.Web.Controllers
             {
                 throw new Exception("Invalid DTO model");
             }
-            //await _service.PopulateRoomAsync(roomId, populationDto);
         }
 
         /// <summary>
