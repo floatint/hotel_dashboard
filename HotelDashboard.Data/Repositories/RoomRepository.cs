@@ -16,12 +16,12 @@ namespace HotelDashboard.Data.Repositories
 
         public override async Task<Room> GetByIdAsync(object id)
         {
-            return await dbSet.Include(x => x.Status).AsNoTracking().FirstOrDefaultAsync(x => x.Id == (int)id);
+            return await dbSet.Include(x => x.Status).ThenInclude(x => x.Clients).AsNoTracking().FirstOrDefaultAsync(x => x.Id == (int)id);
         }
 
         public override async Task<IEnumerable<Room>> GetAllAsync()
         {
-            return await dbSet.Include(x => x.Status).AsNoTracking().ToListAsync();
+            return await dbSet.Include(x => x.Status).ThenInclude(x => x.Clients).AsNoTracking().ToListAsync();
         }
     }
 }
