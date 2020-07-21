@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace HotelDashboard.WPFClient.Converters
 {
+    /// <summary>
+    /// Конвертер RoomIndoDto -> Visibility
+    /// </summary>
     class RoomInfoToVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

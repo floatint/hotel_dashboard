@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace HotelDashboard.WPFClient.ViewModels.Commands
 {
+    /// <summary>
+    /// Реализация ICommand
+    /// </summary>
     class BaseCommand : ICommand
     {
         public event EventHandler CanExecuteChanged

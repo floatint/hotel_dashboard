@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 {
+    /// <summary>
+    /// ViewModel диалога ввода информации о клиенте
+    /// </summary>
     class ClientInfoDialogViewModel : BaseViewModel, IDialogViewModel
     {
         public object[] Data { set => throw new NotImplementedException(); get => throw new NotImplementedException(); }

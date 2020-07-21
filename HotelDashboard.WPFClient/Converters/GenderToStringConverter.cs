@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace HotelDashboard.WPFClient.Converters
 {
+    /// <summary>
+    /// GenderEnum -> string конвертер
+    /// </summary>
     class GenderToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
