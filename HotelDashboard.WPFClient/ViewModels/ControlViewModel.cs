@@ -13,6 +13,9 @@ using System.Windows.Data;
 
 namespace HotelDashboard.WPFClient.ViewModels
 {
+    /// <summary>
+    /// ViewModel управления гостинницей
+    /// </summary>
     class ControlViewModel : BaseViewModel
     {
         /// <summary>

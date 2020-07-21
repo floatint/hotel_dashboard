@@ -5,6 +5,9 @@ using System.Text;
 
 namespace HotelDashboard.WPFClient.Data.Contents
 {
+    /// <summary>
+    /// Object -> JSON конвертер
+    /// </summary>
     class JsonContent : StringContent
     {
         public JsonContent(object o)

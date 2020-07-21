@@ -3,6 +3,9 @@ using System;
 
 namespace HotelDashboard.WPFClient.ViewModels
 {
+    /// <summary>
+    /// ViewModel статистики гостинницы
+    /// </summary>
     class StatisticsViewModel : BaseViewModel
     {
         public Func<ChartPoint, string> PointLabel { get; set; }

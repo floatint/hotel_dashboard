@@ -13,17 +13,10 @@ namespace HotelDashboard.WPFClient.Data
         public HTTPProvider()
         {
             _httpClient = new HttpClient();
-            if (!Uri.TryCreate("http://localhost:49819/", UriKind.Absolute, out Uri baseUri))
-            {
-                throw new Exception("Не удалось создать провайдер данных");
-            }
-            else
-            {
-                _httpClient.BaseAddress = baseUri;
-                _httpClient.DefaultRequestHeaders.Accept.Clear();
-                _httpClient.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-            }
+            // настраиваем на работу с json
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         /// <summary>

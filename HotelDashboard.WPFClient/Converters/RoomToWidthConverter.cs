@@ -7,6 +7,9 @@ using System.Windows.Data;
 
 namespace HotelDashboard.WPFClient.Converters
 {
+    /// <summary>
+    /// Конвертер RoomDto -> ширина элемента комнаты
+    /// </summary>
     public class RoomToWidthConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
