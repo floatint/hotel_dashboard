@@ -1,11 +1,9 @@
-﻿using HotelDashboard.Data.Models;
+﻿using HotelDashboard.Data.Models.Enums;
 using HotelDashboard.Services.DtoModels;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
+using System.Windows;
 using System.Windows.Data;
-using HotelDashboard.Data.Models.Enums;
 
 namespace HotelDashboard.WPFClient.Converters
 {
@@ -15,20 +13,21 @@ namespace HotelDashboard.WPFClient.Converters
         {
             if (value == null)
             {
-                return 0;
-            } else
+                return Application.Current.Resources["DefaultRoomWidth"];
+            }
+            else
             {
                 RoomDto roomDto = value as RoomDto;
                 switch (roomDto.Type)
                 {
                     case RoomType.Single:
-                        return 50;
+                        return Application.Current.Resources["SingleRoomWidth"];
                     case RoomType.Double:
-                        return 100;
+                        return Application.Current.Resources["DoubleRoomWidth"];
                     case RoomType.Family:
-                        return 200;
+                        return Application.Current.Resources["FamilyRoomWidth"];
                     default:
-                        return 50;
+                        return Application.Current.Resources["DefaultRoomWidth"];
                 }
             }
         }

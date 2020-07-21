@@ -1,41 +1,32 @@
-﻿using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
-using HotelDashboard.WPFClient.Data;
+﻿using HotelDashboard.Services.DtoModels;
+using HotelDashboard.Services.DtoModels.Enums;
 using HotelDashboard.WPFClient.Models;
 using HotelDashboard.WPFClient.Services;
 using HotelDashboard.WPFClient.ViewModels.Commands;
 using HotelDashboard.WPFClient.ViewModels.Dialogs;
 using HotelDashboard.WPFClient.Views.Dialogs;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using HotelDashboard.Services.DtoModels.Enums;
-using System.ComponentModel;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Input;
 
 namespace HotelDashboard.WPFClient.ViewModels
 {
-    class MainViewModel : BaseViewModel
+    class ControlViewModel : BaseViewModel
     {
-
         /// <summary>
         /// Корпусы
         /// </summary>
         public ObservableCollection<CorpsDto> Coprs
         {
-
             get
             {
                 try
                 {
                     return _model.GetCorps();
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     _dialogService.ShowMessage("Ошибка", ex.ToString());
                 }
@@ -91,7 +82,8 @@ namespace HotelDashboard.WPFClient.ViewModels
                     try
                     {
                         SelectedRoomInfo = _model.GetRoomInfo(SelectedRoom);
-                    }catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         _dialogService.ShowMessage("Ошибка", ex.ToString());
                     }
@@ -126,13 +118,15 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// <summary>
         /// Комманда выбора корпуса
         /// </summary>
-        public BaseCommand OnSelectCorps => new BaseCommand(o => {
+        public BaseCommand OnSelectCorps => new BaseCommand(o =>
+        {
             SelectedRoom = null;
             Rooms = null;
             try
             {
                 Floors = _model.GetCorpsFloors((CorpsDto)o);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 _dialogService.ShowMessage("Ошибка", ex.ToString());
             }
@@ -147,7 +141,8 @@ namespace HotelDashboard.WPFClient.ViewModels
             try
             {
                 Rooms = _model.GetFloorRooms((FloorDto)o);
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 _dialogService.ShowMessage("Ошибка", ex.ToString());
             }
@@ -173,7 +168,8 @@ namespace HotelDashboard.WPFClient.ViewModels
             try
             {
                 result = (ReserveDataDto)_dialogService.InputDialog<DateInputDialogView, DateInputDialogViewModel>("Резервирование", fieldTitles);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 // нет смысла писать всю информацию
                 _dialogService.ShowMessage("Ошибка", ex.Message);
@@ -209,7 +205,8 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// <summary>
         /// Комманда заселения комнаты
         /// </summary>
-        public BaseCommand OnRoomPopulation => new BaseCommand((_) => {
+        public BaseCommand OnRoomPopulation => new BaseCommand((_) =>
+        {
 
             // данные о времени проживания
             ReserveDataDto reserveDataDto = null;
@@ -223,7 +220,7 @@ namespace HotelDashboard.WPFClient.ViewModels
             {
                 reserveDataDto = (ReserveDataDto)_dialogService.InputDialog<DateInputDialogView, DateInputDialogViewModel>("Период проживания", fieldTitles);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _dialogService.ShowMessage("Ошибка", ex.Message);
                 return;
@@ -255,7 +252,8 @@ namespace HotelDashboard.WPFClient.ViewModels
                     // формируем данные для отправки в модель
                     PopulationDto populationDto = new PopulationDto
                     {
-                        Clients = new ClientsEnumerableDto {
+                        Clients = new ClientsEnumerableDto
+                        {
                             ClientsEnumerable = clients.AsEnumerable()
                         },
                         ReserveData = reserveDataDto
@@ -278,7 +276,8 @@ namespace HotelDashboard.WPFClient.ViewModels
                     try
                     {
                         SelectedRoomInfo = _model.GetRoomInfo(SelectedRoom);
-                    } catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         _dialogService.ShowMessage("Ошибка", ex.ToString());
                     }
@@ -299,13 +298,14 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// <summary>
         /// Комманда освобождения комнаты
         /// </summary>
-        public BaseCommand OnRoomFree  => new BaseCommand((_) => {
+        public BaseCommand OnRoomFree => new BaseCommand((_) =>
+        {
             // пытаемся освободить комнату
             try
             {
                 _model.FreeRoom(SelectedRoom);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _dialogService.ShowMessage("Ошибка", ex.ToString());
                 return;
@@ -317,16 +317,16 @@ namespace HotelDashboard.WPFClient.ViewModels
             CollectionViewSource.GetDefaultView(Rooms).Refresh();
             OnPropertyChanged(nameof(SelectedRoom));
             OnPropertyChanged(nameof(SelectedRoomInfo));
-            
+
         });
 
-        public MainViewModel()
+        public ControlViewModel()
         {
             // инициализация сервиса диалогов
             _dialogService = new DialogService();
         }
 
-        private readonly MainModel _model = new MainModel();
+        private readonly ControlModel _model = new ControlModel();
         private IDialogService _dialogService;
         private ObservableCollection<FloorDto> _floors;
         private ObservableCollection<RoomDto> _rooms;

@@ -12,7 +12,7 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 {
     class ClientInfoDialogViewModel : BaseViewModel, IDialogViewModel
     {
-        public object[] Data { set => throw new NotImplementedException(); get => throw new  NotImplementedException(); }
+        public object[] Data { set => throw new NotImplementedException(); get => throw new NotImplementedException(); }
         public string Title
         {
             set
@@ -52,7 +52,7 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("Введены некорректные данные:");
                 sb.AppendLine();
-                foreach(var e in validationErrors)
+                foreach (var e in validationErrors)
                 {
                     sb.AppendLine(e);
                 }
@@ -60,7 +60,8 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
                 _isValid = false;
                 // показываем пользователю
                 _dialogService.ShowMessage("Ошибка", sb.ToString());
-            } else
+            }
+            else
             {
                 _isValid = true;
                 // модель валидна, можно закрыть диалог

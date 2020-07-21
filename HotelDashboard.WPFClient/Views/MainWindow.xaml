@@ -1,0 +1,29 @@
+﻿<Window x:Class="HotelDashboard.WPFClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels"
+        xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
+        xmlns:services="clr-namespace:HotelDashboard.Services.DtoModels.Enums;assembly=HotelDashboard.Services"
+        xmlns:views="clr-namespace:HotelDashboard.WPFClient.Views"
+        mc:Ignorable="d"
+        Title="Гостинница" Height="600" Width="600">
+    <!-- Ресурсы окна -->
+    <Window.Resources>
+        <!-- Контексты данных -->
+        <vm:ControlViewModel x:Key="ControlViewModel"/>
+        <vm:StatisticsViewModel x:Key="StatisticsViewModel"/>
+    </Window.Resources>
+
+    <Grid>
+        <TabControl>
+            <TabItem Width="150" Height="30" Header="Управление">
+                <views:ControlView DataContext="{StaticResource ControlViewModel}"/>
+            </TabItem>
+            <TabItem Width="150" Height="30" Header="Статистика" Margin="-2,-1,2,1">
+                <views:StatisticsView DataContext="{StaticResource StatisticsViewModel}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

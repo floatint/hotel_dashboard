@@ -1,10 +1,7 @@
 ﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.IIS.Core;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Web.Controllers
@@ -47,7 +44,7 @@ namespace HotelDashboard.Web.Controllers
             {
                 throw new ArgumentException("Invalid DTO model");
             }
-            
+
         }
 
         /// <summary>

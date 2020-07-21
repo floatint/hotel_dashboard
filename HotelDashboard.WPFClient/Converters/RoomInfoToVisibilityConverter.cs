@@ -1,11 +1,8 @@
-﻿using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.DtoModels.Enums;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
@@ -35,21 +32,21 @@ namespace HotelDashboard.WPFClient.Converters
                             return Visibility.Collapsed;
                         }
                     case RoomState.Reserved:
-                            if (roomInfoDto.ReserveStart != default && roomInfoDto.ReserveEnd != default)
+                        if (roomInfoDto.ReserveStart != default && roomInfoDto.ReserveEnd != default)
+                        {
+                            if (roomInfoDto.Clients == null || roomInfoDto.Clients.Count() == 0)
                             {
-                                if (roomInfoDto.Clients == null || roomInfoDto.Clients.Count() == 0)
-                                {
-                                    return Visibility.Visible;
-                                }
-                                else
-                                {
-                                    return Visibility.Collapsed;
-                                }
+                                return Visibility.Visible;
                             }
                             else
                             {
                                 return Visibility.Collapsed;
                             }
+                        }
+                        else
+                        {
+                            return Visibility.Collapsed;
+                        }
                     case RoomState.Populated:
                         if (roomInfoDto.ReserveStart != default && roomInfoDto.ReserveEnd != default)
                         {

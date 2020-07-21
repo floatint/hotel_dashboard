@@ -1,8 +1,6 @@
 ﻿using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelDashboard.Services.DtoModels

@@ -1,8 +1,5 @@
-﻿using HotelDashboard.Services.DtoModels;
-using HotelDashboard.WPFClient.Data.Contents;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 
 namespace HotelDashboard.WPFClient.Data

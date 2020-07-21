@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
-using HotelDashboard.Services.Services;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.WPFClient.Data;
+using System.Collections.ObjectModel;
 
 namespace HotelDashboard.WPFClient.Models
 {
     /// <summary>
-    /// Модель главного окна
+    /// Модель управления
     /// </summary>
-    public class MainModel
+    public class ControlModel
     {
 
         /// <summary>

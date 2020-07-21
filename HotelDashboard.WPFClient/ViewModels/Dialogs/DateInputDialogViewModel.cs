@@ -3,10 +3,6 @@ using HotelDashboard.WPFClient.Models.Dialogs;
 using HotelDashboard.WPFClient.Services;
 using HotelDashboard.WPFClient.ViewModels.Commands;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Text;
 using System.Windows;
 
 namespace HotelDashboard.WPFClient.ViewModels.Dialogs

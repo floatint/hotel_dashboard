@@ -42,7 +42,7 @@ namespace HotelDashboard.Web.Controllers
             {
                 throw new ArgumentException("Invalid DTO model");
             }
-            
+
         }
 
         /// <summary>

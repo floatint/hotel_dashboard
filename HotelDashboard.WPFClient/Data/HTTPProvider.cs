@@ -1,15 +1,10 @@
 ﻿using HotelDashboard.WPFClient.Data.Contents;
 using Newtonsoft.Json;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace HotelDashboard.WPFClient.Data
 {
@@ -21,7 +16,8 @@ namespace HotelDashboard.WPFClient.Data
             if (!Uri.TryCreate("http://localhost:49819/", UriKind.Absolute, out Uri baseUri))
             {
                 throw new Exception("Не удалось создать провайдер данных");
-            } else
+            }
+            else
             {
                 _httpClient.BaseAddress = baseUri;
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
@@ -102,9 +98,10 @@ namespace HotelDashboard.WPFClient.Data
                 sb.AppendLine(response.RequestMessage.Method.ToString());
                 sb.Append("Status: ");
                 sb.Append(response.StatusCode);
-                
+
                 throw new HttpRequestException(sb.ToString());
-            } else
+            }
+            else
             {
                 // если успешно
                 // запускаем таск на получение контента

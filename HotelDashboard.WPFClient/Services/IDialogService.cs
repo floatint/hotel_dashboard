@@ -1,8 +1,5 @@
 ﻿using HotelDashboard.WPFClient.ViewModels;
 using HotelDashboard.WPFClient.ViewModels.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 
 namespace HotelDashboard.WPFClient.Services

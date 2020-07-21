@@ -1,7 +1,5 @@
 ﻿using HotelDashboard.Services.DtoModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelDashboard.WPFClient.Models.Dialogs
@@ -24,7 +22,7 @@ namespace HotelDashboard.WPFClient.Models.Dialogs
             // валидируем модель
             if (!Validator.TryValidateObject(newClientDto, context, results))
             {
-                foreach(var r in results)
+                foreach (var r in results)
                 {
                     errors.Add(r.ErrorMessage);
                 }
