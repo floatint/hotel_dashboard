@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
-using HotelDashboard.Services.Services;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.WPFClient.Data;
+using System.Collections.ObjectModel;
 
 namespace HotelDashboard.WPFClient.Models
 {
     /// <summary>
-    /// Модель главного окна
+    /// Модель управления
     /// </summary>
-    public class MainModel
+    public class ControlModel
     {
 
         /// <summary>
@@ -52,16 +46,35 @@ namespace HotelDashboard.WPFClient.Models
             return _hotelProvider.GetRoomInfo<RoomInfoDto>(roomDto.Id);
         }
 
+        /// <summary>
+        /// Зарезервировать комнату
+        /// </summary>
+        /// <param name="roomDto">DTO комнаты</param>
+        /// <param name="reserveDataDto">Данные резервирования</param>
         public void ReserveRoom(RoomDto roomDto, ReserveDataDto reserveDataDto)
         {
-            _hotelProvider.ReserveRoom<ReserveDataDto>(roomDto.Id, reserveDataDto);
+            _hotelProvider.ReserveRoom(roomDto.Id, reserveDataDto);
         }
 
-        public MainModel()
+        /// <summary>
+        /// Освободить комнату
+        /// </summary>
+        /// <param name="roomDto">DTO комнаты</param>
+        public void FreeRoom(RoomDto roomDto)
         {
-            _hotelProvider = new HotelWebApiProvider();
+            _hotelProvider.FreeRoom(roomDto.Id);
         }
 
-        private readonly IHotelProvider _hotelProvider;
+        /// <summary>
+        /// Заселить комнату
+        /// </summary>
+        /// <param name="roomDto">DTO комнаты</param>
+        /// <param name="populationDto">Информация для заселения</param>
+        public void PopulateRoom(RoomDto roomDto, PopulationDto populationDto)
+        {
+            _hotelProvider.PopulateRoom(roomDto.Id, populationDto);
+        }
+
+        private readonly IHotelProvider _hotelProvider = new HotelWebApiProvider();
     }
 }

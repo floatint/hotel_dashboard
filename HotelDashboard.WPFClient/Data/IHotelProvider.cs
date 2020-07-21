@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace HotelDashboard.WPFClient.Data
 {
@@ -40,5 +37,17 @@ namespace HotelDashboard.WPFClient.Data
         /// <param name="roomId">ID комнаты</param>
         /// <param name="reservationData">Данные для резервирования</param>
         void ReserveRoom<TReservationData>(int roomId, TReservationData reservationData);
+        /// <summary>
+        /// Освободить комнату
+        /// </summary>
+        /// <param name="roomId"></param>
+        void FreeRoom(int roomId);
+        /// <summary>
+        /// Заселить комнату
+        /// </summary>
+        /// <typeparam name="TPopulationData">Тип данных с информацией о клиентах</typeparam>
+        /// <param name="roomId">ID комнаты</param>
+        /// <param name="populationData">Данные клиентов</param>
+        void PopulateRoom<TPopulationData>(int roomId, TPopulationData populationData);
     }
 }

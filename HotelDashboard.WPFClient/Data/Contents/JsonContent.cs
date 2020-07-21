@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace HotelDashboard.WPFClient.Data.Contents
 {

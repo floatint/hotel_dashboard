@@ -1,8 +1,5 @@
 ﻿using HotelDashboard.WPFClient.ViewModels;
 using HotelDashboard.WPFClient.ViewModels.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 
 namespace HotelDashboard.WPFClient.Services
@@ -24,7 +21,7 @@ namespace HotelDashboard.WPFClient.Services
         /// <typeparam name="TView">Тип представления</typeparam>
         /// <typeparam name="TViewModel">Тип логики представления</typeparam>
         /// <param name="title">Заголовок</param>
-        object InputDialog<TView, TViewModel>(string title) where TViewModel : BaseViewModel, IDialogViewModel, new()
+        object InputDialog<TView, TViewModel>(string title, object[] data) where TViewModel : BaseViewModel, IDialogViewModel, new()
                                                             where TView : Window, new();
     }
 }

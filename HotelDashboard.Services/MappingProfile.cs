@@ -71,6 +71,12 @@ namespace HotelDashboard.Services
         {
             CreateMap<NewClientDto, Client>();
             CreateMap<Client, ClientDto>();
+
+            CreateMap<PopulationDto, ClientsEnumerableDto>()
+                .ForMember(x => x.ClientsEnumerable, m => m.MapFrom(y => y.Clients.ClientsEnumerable));
+            CreateMap<PopulationDto, ReserveDataDto>()
+                .ForMember(x => x.ReserveStart, m => m.MapFrom(y => y.ReserveData.ReserveStart))
+                .ForMember(x => x.ReserveEnd, m => m.MapFrom(y => y.ReserveData.ReserveEnd));
         }
 
     }

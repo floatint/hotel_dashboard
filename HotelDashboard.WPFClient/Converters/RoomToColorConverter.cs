@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using HotelDashboard.Data.Models;
-using HotelDashboard.Services.DtoModels;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Windows.Data;
+﻿using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.DtoModels.Enums;
-using System.Windows.Media;
+using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
 
 namespace HotelDashboard.WPFClient.Converters
 {
@@ -19,18 +15,18 @@ namespace HotelDashboard.WPFClient.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return new SolidColorBrush(Colors.Gray);
+                return Application.Current.Resources["DefaultRoomBrush"];
             RoomDto roomDto = value as RoomDto;
             switch (roomDto.State)
             {
                 case RoomState.Free:
-                    return new SolidColorBrush(Colors.Green);
+                    return Application.Current.Resources["FreeRoomBrush"];
                 case RoomState.Reserved:
-                    return new SolidColorBrush(Colors.Yellow);
+                    return Application.Current.Resources["ReservedRoomBrush"];
                 case RoomState.Populated:
-                    return new SolidColorBrush(Colors.Red);
+                    return Application.Current.Resources["PopulatedRoomBrush"];
                 default:
-                    return new SolidColorBrush(Colors.Green);
+                    return Application.Current.Resources["DefaultRoomBrush"];
             }
         }
 

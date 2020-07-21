@@ -1,8 +1,5 @@
-﻿using HotelDashboard.Services.DtoModels;
-using HotelDashboard.WPFClient.Data.Contents;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 
 namespace HotelDashboard.WPFClient.Data
@@ -61,6 +58,18 @@ namespace HotelDashboard.WPFClient.Data
         {
             Uri reservationUri = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/reserve", roomId), UriKind.Relative));
             _httpProvider.Update<TReservationData, object>(reservationUri, reservationData);
+        }
+
+        public void FreeRoom(int roomId)
+        {
+            Uri freeRoom = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/free", roomId), UriKind.Relative));
+            _httpProvider.Update<object, object>(freeRoom, null);
+        }
+
+        public void PopulateRoom<TPopulationData>(int roomId, TPopulationData populationData)
+        {
+            Uri populateRoom = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/populate", roomId), UriKind.Relative));
+            _httpProvider.Update<TPopulationData, object>(populateRoom, populationData);
         }
 
         // базовый адрес api

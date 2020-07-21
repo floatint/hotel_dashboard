@@ -3,7 +3,6 @@ using HotelDashboard.Data.Models;
 using HotelDashboard.Data.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
@@ -50,25 +49,17 @@ namespace HotelDashboard.Services.Services
             }
         }
 
-        public async Task DeleteFloorAsync(int corpsId, int floorId)
+        public async Task DeleteFloorAsync(int floorId)
         {
-            Corps corps = await repository.GetByIdAsync(corpsId);
-            if (corps == null)
+            Floor floor = await _floorRepository.GetByIdAsync(floorId);
+            if (floor == null)
             {
                 throw new ArgumentOutOfRangeException();
             }
             else
             {
-                Floor floor = corps.Floors.FirstOrDefault(x => x.Id == floorId);
-                if (floor == null)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-                else
-                {
-                    _floorRepository.Delete(floor);
-                    await unitOfWork.SaveAsync();
-                }
+                _floorRepository.Delete(floor);
+                await unitOfWork.SaveAsync();
             }
         }
 

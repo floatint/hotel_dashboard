@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HotelDashboard.WPFClient"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <!-- Цвета комнат-->
+    <SolidColorBrush x:Key="FreeRoomBrush" Color="Green"/>
+    <SolidColorBrush x:Key="ReservedRoomBrush" Color="Yellow"/>
+    <SolidColorBrush x:Key="PopulatedRoomBrush" Color="Red"/>
+    <SolidColorBrush x:Key="DefaultRoomBrush" Color="Gray"/>
+    <!-- Размер комнат -->
+    <sys:Int32 x:Key="SingleRoomWidth">50</sys:Int32>
+    <sys:Int32 x:Key="DoubleRoomWidth">100</sys:Int32>
+    <sys:Int32 x:Key="FamilyRoomWidth">150</sys:Int32>
+    <sys:Int32 x:Key="DefaultRoomWidth">0</sys:Int32>
+</ResourceDictionary>
