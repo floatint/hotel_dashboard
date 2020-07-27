@@ -8,7 +8,8 @@
         xmlns:services="clr-namespace:HotelDashboard.Services.DtoModels.Enums;assembly=HotelDashboard.Services"
         xmlns:views="clr-namespace:HotelDashboard.WPFClient.Views"
         mc:Ignorable="d"
-        Title="Гостинница" Height="600" Width="600">
+        Style="{StaticResource MainWindowStyle}"
+        Title="Гостиница">
     <!-- Ресурсы окна -->
     <Window.Resources>
         <!-- Контексты данных -->

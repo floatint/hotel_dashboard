@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views.Dialogs"
         xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="380" Width="400">
+        Style="{StaticResource ClientInfoDialogStyle}"
+        Title="{Binding Title}">
     
     <Window.Resources>
         <conv:BoolToEnumConverter x:Key="BoolToEnumConverter"/>
@@ -18,16 +19,19 @@
             <TextBox Width="250" 
                      Height="30" 
                      FontSize="16"
+                     MaxLength="{StaticResource FirstNameInputLength}"
                      Text="{Binding ClientInfo.FirstName}"/>
             <TextBlock Text="Фамилия:" FontSize="16"/>
             <TextBox Width="250" 
                      Height="30" 
                      FontSize="16"
+                     MaxLength="{StaticResource SecondNameInputLength}"
                      Text="{Binding ClientInfo.SecondName}"/>
             <TextBlock Text="Отчество:" FontSize="16"/>
             <TextBox Width="250" 
                      Height="30" 
                      FontSize="16"
+                     MaxLength="{StaticResource LastNameInputLength}"
                      Text="{Binding ClientInfo.LastName}"/>
             <TextBlock Text="Дата рождения:" FontSize="16"/>
             <DatePicker FontSize="16" 
@@ -49,6 +53,7 @@
             <TextBox Width="250" 
                      Height="30" 
                      FontSize="16"
+                     MaxLength="{StaticResource RegistrationAddressInputLength}"
                      Text="{Binding ClientInfo.RegistrationAddress}"/>
 
             <Button Content="Ok" 

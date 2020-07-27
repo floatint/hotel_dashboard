@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views.Dialogs"
         xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels.Dialogs"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="200" Width="300">
-    <!--<Window.DataContext>
-        <vm:ReservationDialogViewModel/>
-    </Window.DataContext>-->
+        Style="{StaticResource DateInputDialogStyle}"
+        Title="{Binding Title}">
     <Grid>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="{Binding StartDateTitle}" FontSize="16"/>
