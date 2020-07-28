@@ -16,7 +16,7 @@ using System.Windows.Media;
 namespace HotelDashboard.WPFClient.ViewModels
 {
     /// <summary>
-    /// ViewModel статистики гостинницы
+    /// ViewModel статистики гостиницы
     /// </summary>
     class StatisticsViewModel : BaseViewModel
     {
@@ -278,7 +278,7 @@ namespace HotelDashboard.WPFClient.ViewModels
             string freeRoomTitle = "Свободно";
             string reservedRoomTitle = "Зарезервировано";
             string populatedRoomTitle = "Занято";
-            // 
+            // кисти
             SolidColorBrush freeRoomBrush = (SolidColorBrush)Application.Current.Resources["FreeRoomBrush"];
             SolidColorBrush reservedRoomBrush = (SolidColorBrush)Application.Current.Resources["ReservedRoomBrush"];
             SolidColorBrush populatedRoomBrush = (SolidColorBrush)Application.Current.Resources["PopulatedRoomBrush"];
