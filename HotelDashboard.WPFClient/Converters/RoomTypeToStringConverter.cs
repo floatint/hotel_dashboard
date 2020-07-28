@@ -6,16 +6,17 @@ using System.Windows.Data;
 namespace HotelDashboard.WPFClient.Converters
 {
     /// <summary>
-    /// GenderEnum -> string конвертер
+    /// Конвертер RoomType -> string
     /// </summary>
-    class GenderToStringConverter : IValueConverter
+    class RoomTypeToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((ClientGender)value) switch
+            return ((RoomType)value) switch
             {
-                ClientGender.Male => "Мужской",
-                ClientGender.Female => "Женский",
+                RoomType.Single => "Одноместная",
+                RoomType.Double => "Двухместная",
+                RoomType.Family => "Семейная",
                 _ => null,
             };
         }

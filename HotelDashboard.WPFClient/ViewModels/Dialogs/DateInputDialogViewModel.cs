@@ -62,12 +62,17 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
         }
 
 
+        /// <summary>
+        /// Выбранная начальная дата
+        /// </summary>
         public DateTime StartDate
         {
             set
             {
                 _startDate = value;
                 OnPropertyChanged(nameof(StartDate));
+                // заполняем конечную дату
+                EndDate = _startDate;
             }
             get
             {
@@ -75,23 +80,86 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
             }
         }
 
+        /// <summary>
+        /// Выбранная конечная дата
+        /// </summary>
         public DateTime EndDate
         {
             set
             {
                 _endDate = value;
                 OnPropertyChanged(nameof(EndDate));
+                // устанавливаем диапозон конечной даты
+                // просто вызываем OnPropertyChanged
+                SecondDisplayDateStart = value;
+                SecondDisplayDateEnd = value;
             }
             get
             {
                 return _endDate;
             }
         }
+        /// <summary>
+        /// DisplayDateStart для начальной даты
+        /// </summary>
+        public DateTime FirstDisplayDateStart
+        {
+            get
+            {
+                return DateTime.Now.Date;
+            }
+        }
 
         /// <summary>
-        /// Подтверждение резервирования. На вход должен получить класс Window, чтобы закрыть диалог.
+        /// DisplayDateEnd для начальной даты
         /// </summary>
-        public BaseCommand OnOkCommand => new BaseCommand((o) =>
+        public DateTime FirstDisplayDateEnd
+        {
+            get
+            {
+                // получим период резервирования
+                return _model.CalcPeriod(DateTime.Now.Date);
+            }
+        }
+
+        /// <summary>
+        /// DisplayDateStart для конечной
+        /// </summary>
+        public DateTime SecondDisplayDateStart
+        {
+            set
+            {
+                OnPropertyChanged(nameof(SecondDisplayDateStart));
+            }
+            get
+            {
+                // просто вернем конечную дату
+                return EndDate;
+            }
+        }
+
+        /// <summary>
+        /// DisplayDateEnd для конечной
+        /// </summary>
+        public DateTime SecondDisplayDateEnd
+        {
+            set
+            {
+                OnPropertyChanged(nameof(SecondDisplayDateEnd));
+            }
+            get
+            {
+                // пересчитываем период
+                return _model.CalcPeriod(EndDate);
+            }
+        }
+
+
+        /// <summary>
+        /// Подтверждение резервирования. 
+        /// На вход должен получить класс Window, чтобы закрыть диалог.
+        /// </summary>
+        public BaseCommand OnSaveCommand => new BaseCommand((o) =>
         {
             if (_model.IsValid(_startDate, _endDate))
             {
@@ -103,18 +171,15 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
             }
             else
             {
-                _dialogService.ShowMessage("Ошибка", "Введите корректные даты резервирования");
+                _dialogService.ShowMessage("Ошибка", "Введите корректные даты");
                 return;
             }
-                // закрываем диалог
-                ((Window)o).Close();
+            // закрываем диалог
+            ((Window)o).Close();
         });
 
         public DateInputDialogViewModel()
         {
-            _model = new DateInputDialogModel();
-            _dialogService = new DialogService();
-
             // установим начальные значения
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date;
@@ -122,8 +187,8 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 
         private DateTime _startDate;
         private DateTime _endDate;
-        private DateInputDialogModel _model;
-        private IDialogService _dialogService;
+        private readonly DateInputDialogModel _model = new DateInputDialogModel();
+        private readonly IDialogService _dialogService = new DialogService();
         private ReserveDataDto _dialogResult;
         private string _title;
         private object[] _data;

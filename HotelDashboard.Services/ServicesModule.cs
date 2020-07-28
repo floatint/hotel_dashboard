@@ -17,6 +17,7 @@ namespace HotelDashboard.Services
             services.AddScoped<ICorpsService, CorpsService>();
             services.AddScoped<IFloorService, FloorService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped(typeof(IBaseCRUDService<>), typeof(BaseService<>));
             // регистрируем маппинг
             services.AddAutoMapper(typeof(MappingProfile));

@@ -10,18 +10,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace HotelDashboard.WPFClient.ViewModels
 {
     /// <summary>
-    /// ViewModel управления гостинницей
+    /// ViewModel управления гостиницей
     /// </summary>
     class ControlViewModel : BaseViewModel
     {
         /// <summary>
-        /// Корпусы
+        /// Корпуса
         /// </summary>
-        public ObservableCollection<CorpsDto> Coprs
+        public ObservableCollection<CorpsDto> Corps
         {
             get
             {
@@ -119,9 +120,9 @@ namespace HotelDashboard.WPFClient.ViewModels
         }
 
         /// <summary>
-        /// Комманда выбора корпуса
+        /// Команда выбора корпуса
         /// </summary>
-        public BaseCommand OnSelectCorps => new BaseCommand(o =>
+        public ICommand OnSelectCorps => new BaseCommand(o =>
         {
             SelectedRoom = null;
             Rooms = null;
@@ -136,9 +137,9 @@ namespace HotelDashboard.WPFClient.ViewModels
         });
 
         /// <summary>
-        /// Комманда выбора этажа
+        /// Команда выбора этажа
         /// </summary>
-        public BaseCommand OnSelectFloor => new BaseCommand(o =>
+        public ICommand OnSelectFloor => new BaseCommand(o =>
         {
             SelectedRoom = null;
             try
@@ -152,17 +153,17 @@ namespace HotelDashboard.WPFClient.ViewModels
         });
 
         /// <summary>
-        /// Комманда выбора комнаты
+        /// Команда выбора комнаты
         /// </summary>
-        public BaseCommand OnSelectRoom => new BaseCommand(o =>
+        public ICommand OnSelectRoom => new BaseCommand(o =>
         {
             SelectedRoom = (RoomDto)o;
         });
 
         /// <summary>
-        /// Комманда резервирования комнаты
+        /// Команда резервирования комнаты
         /// </summary>
-        public BaseCommand OnRoomReservation => new BaseCommand((_) =>
+        public ICommand OnRoomReservation => new BaseCommand((_) =>
         {
             // объявляем надписи диалога
             object[] fieldTitles = new object[2] { "Дата резервирования:", "Дата окончания резервирования:" };
@@ -206,9 +207,9 @@ namespace HotelDashboard.WPFClient.ViewModels
         });
 
         /// <summary>
-        /// Комманда заселения комнаты
+        /// Команда заселения комнаты
         /// </summary>
-        public BaseCommand OnRoomPopulation => new BaseCommand((_) =>
+        public ICommand OnRoomPopulation => new BaseCommand((_) =>
         {
 
             // данные о времени проживания
@@ -299,9 +300,9 @@ namespace HotelDashboard.WPFClient.ViewModels
         });
 
         /// <summary>
-        /// Комманда освобождения комнаты
+        /// Команда освобождения комнаты
         /// </summary>
-        public BaseCommand OnRoomFree => new BaseCommand((_) =>
+        public ICommand OnRoomFree => new BaseCommand((_) =>
         {
             // пытаемся освободить комнату
             try
@@ -325,12 +326,10 @@ namespace HotelDashboard.WPFClient.ViewModels
 
         public ControlViewModel()
         {
-            // инициализация сервиса диалогов
-            _dialogService = new DialogService();
         }
 
         private readonly ControlModel _model = new ControlModel();
-        private IDialogService _dialogService;
+        private readonly IDialogService _dialogService = new DialogService();
         private ObservableCollection<FloorDto> _floors;
         private ObservableCollection<RoomDto> _rooms;
         private RoomDto _selectedRoom;

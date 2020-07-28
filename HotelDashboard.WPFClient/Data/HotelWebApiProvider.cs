@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HotelDashboard.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
 namespace HotelDashboard.WPFClient.Data
 {
     /// <summary>
-    /// Провайдер Web Api для сервера гостинницы
+    /// Провайдер Web Api для сервера гостиницы
     /// </summary>
     class HotelWebApiProvider : IHotelProvider
     {
@@ -70,6 +71,24 @@ namespace HotelDashboard.WPFClient.Data
         {
             Uri populateRoom = new Uri(_baseApiUri, new Uri(string.Format("api/room/{0}/populate", roomId), UriKind.Relative));
             _httpProvider.Update<TPopulationData, object>(populateRoom, populationData);
+        }
+
+        public TStatisticsDto GetCorpsStatistics<TStatisticsDto>(int corpsId)
+        {
+            Uri corpsStatistics = new Uri(_baseApiUri, new Uri(string.Format("api/statistics/corps/{0}", corpsId), UriKind.Relative));
+            return _httpProvider.Get<TStatisticsDto>(corpsStatistics);
+        }
+
+        public TStatisticsDto GetFloorStatistics<TStatisticsDto>(int floorId)
+        {
+            Uri floorStatistics = new Uri(_baseApiUri, new Uri(string.Format("api/statistics/floor/{0}", floorId), UriKind.Relative));
+            return _httpProvider.Get<TStatisticsDto>(floorStatistics);
+        }
+
+        public TStatisticsDto GetRoomTypeStatistics<TStatisticsDto>(int floorId, RoomType roomType)
+        {
+            Uri roomTypeStatistics = new Uri(_baseApiUri, new Uri(string.Format("api/statistics/floor/{0}/roomtype/{1}", floorId, Enum.Format(typeof(RoomType), roomType, "d")), UriKind.Relative));
+            return _httpProvider.Get<TStatisticsDto>(roomTypeStatistics);
         }
 
         // базовый адрес api

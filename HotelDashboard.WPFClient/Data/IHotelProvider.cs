@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using HotelDashboard.Data.Models.Enums;
+using System.Collections.Generic;
 
 namespace HotelDashboard.WPFClient.Data
 {
     /// <summary>
-    /// Интерфейс для работы с источником данных гостинницы
+    /// Интерфейс для работы с источником данных гостиницы
     /// </summary>
     public interface IHotelProvider
     {
         /// <summary>
-        /// Получить список всех корпусов гостинницы
+        /// Получить список всех корпусов гостиницы
         /// </summary>
         /// <typeparam name="TCorpsDto">Тип DTO корпуса</typeparam>
         IEnumerable<TCorpsDto> GetAllCorps<TCorpsDto>();
@@ -49,5 +50,24 @@ namespace HotelDashboard.WPFClient.Data
         /// <param name="roomId">ID комнаты</param>
         /// <param name="populationData">Данные клиентов</param>
         void PopulateRoom<TPopulationData>(int roomId, TPopulationData populationData);
+        /// <summary>
+        /// Получить статистику по корпусу
+        /// </summary>
+        /// <typeparam name="TStatisticsDto">Тип DTO статистики</typeparam>
+        /// <param name="corpsId">ID корпуса</param>
+        TStatisticsDto GetCorpsStatistics<TStatisticsDto>(int corpsId);
+        /// <summary>
+        /// Получить статистику по этажу
+        /// </summary>
+        /// <typeparam name="TStatisticsDto">Тип DTO статистики</typeparam>
+        /// <param name="floorId">ID этажа</param>
+        TStatisticsDto GetFloorStatistics<TStatisticsDto>(int floorId);
+        /// <summary>
+        /// Получить статистику по типу комнаты
+        /// </summary>
+        /// <typeparam name="TStatisticsDto">Тип DTO статистики</typeparam>
+        /// <param name="floorId">ID этажа</param>
+        /// <param name="roomType">Тип комнаты</param>
+        TStatisticsDto GetRoomTypeStatistics<TStatisticsDto>(int floorId, RoomType roomType);
     }
 }

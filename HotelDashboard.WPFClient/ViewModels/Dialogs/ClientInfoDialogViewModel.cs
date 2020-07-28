@@ -46,7 +46,7 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
         /// Команда формирования информации о пользователе.
         /// На вход передается объект класса Window для возможности закрытия
         /// </summary>
-        public ICommand OnOkCommand => new BaseCommand((o) =>
+        public ICommand OnSaveCommand => new BaseCommand((o) =>
         {
             ICollection<string> validationErrors = new List<string>();
             // если данные не прошли валидацию

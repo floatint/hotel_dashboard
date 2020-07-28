@@ -78,10 +78,9 @@ namespace HotelDashboard.WPFClient.Data
         /// <param name="response">Ответ сервера</param>
         private TResult FromResponse<TResult>(HttpResponseMessage response)
         {
-            // если запрос был не удачный
+            // если запрос был неудачный
             if (!response.IsSuccessStatusCode)
             {
-                //TODO: свой класс исключений ?
                 // формируем сообщение
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("Не удалось получить данные");
@@ -92,7 +91,7 @@ namespace HotelDashboard.WPFClient.Data
                 sb.Append("Status: ");
                 sb.Append(response.StatusCode);
 
-                throw new HttpRequestException(sb.ToString());
+                throw new Exception(sb.ToString());
             }
             else
             {

@@ -1,4 +1,4 @@
-﻿using HotelDashboard.Data.Models.Enums;
+﻿using HotelDashboard.WPFClient.Views.Enums;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -6,16 +6,17 @@ using System.Windows.Data;
 namespace HotelDashboard.WPFClient.Converters
 {
     /// <summary>
-    /// GenderEnum -> string конвертер
+    /// Конвертер PlotType -> string
     /// </summary>
-    class GenderToStringConverter : IValueConverter
+    class PlotTypeToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((ClientGender)value) switch
+            return ((PlotType)value) switch
             {
-                ClientGender.Male => "Мужской",
-                ClientGender.Female => "Женский",
+                PlotType.Column => "Столбцы",
+                PlotType.Row => "Строки",
+                PlotType.Pie => "Круговая",
                 _ => null,
             };
         }

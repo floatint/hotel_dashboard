@@ -4,8 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:services="clr-namespace:HotelDashboard.Services.DtoModels.Enums;assembly=HotelDashboard.Services"
-             xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views"
-             xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels"
              xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -23,23 +21,26 @@
 
     <UniformGrid Columns="2" Background="DarkGray">
         <StackPanel HorizontalAlignment="Left" Background="Gray">
-            <TextBlock Text="Корпус" 
+            
+            <!-- Блок корпусов -->
+            <StackPanel Visibility="{Binding Corps, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="Корпус" 
                                HorizontalAlignment="Center"
                                FontSize="12"
                                Margin="0, 5, 0, 5">
-            </TextBlock>
-            <!-- Панель с корпусами -->
-            <WrapPanel Height="50" HorizontalAlignment="Center" Orientation="Horizontal">
-                <ItemsControl x:Name="CorpsList" ItemsSource="{Binding Coprs}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                </TextBlock>
+                <!-- Панель с корпусами -->
+                <WrapPanel Height="50" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="CorpsList" ItemsSource="{Binding Corps}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton GroupName="Corps"
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Corps"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="0, 0, 3, 3"
@@ -48,27 +49,31 @@
                                                  Command="{Binding DataContext.OnSelectCorps, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
                                                  CommandParameter="{Binding}"
                                                  />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </WrapPanel>
-            <TextBlock Text="Этаж" 
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+
+            <!-- Блок этажей -->
+            <StackPanel Visibility="{Binding Floors, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="Этаж" 
                                HorizontalAlignment="Center"
                                FontSize="12"
                                Margin="0, 0, 0, 5">
-            </TextBlock>
-            <!-- Панель с этажами -->
-            <WrapPanel Height="100" HorizontalAlignment="Center" Orientation="Horizontal">
-                <ItemsControl x:Name="FloorList" ItemsSource="{Binding Floors}" AlternationCount="8">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                </TextBlock>
+                <!-- Панель с этажами -->
+                <WrapPanel Height="100" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="FloorList" ItemsSource="{Binding Floors}" AlternationCount="8">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton GroupName="Floors"
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Floors"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="0, 0, 3, 3"
@@ -79,27 +84,31 @@
                                                  Command="{Binding DataContext.OnSelectFloor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
                                                  CommandParameter="{Binding}"
                                                  />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </WrapPanel>
-            <TextBlock Text="Комнаты" 
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+            
+            <!-- Блок комнат -->
+            <StackPanel Visibility="{Binding Rooms, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="Комнаты" 
                                HorizontalAlignment="Center"
                                FontSize="12"
                                Margin="0, 5, 0, 0">
-            </TextBlock>
-            <!-- Панель с комнатами -->
-            <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <ItemsControl x:Name="RoomList" ItemsSource="{Binding Rooms}" AlternationCount="10">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                </TextBlock>
+                <!-- Панель с комнатами -->
+                <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="RoomList" ItemsSource="{Binding Rooms}" AlternationCount="10">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton GroupName="Rooms"
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Rooms"
                                          Width="{Binding Converter={StaticResource RoomToWidthConverter}}"
                                          Height="50"
                                          Margin="0, 0, 3, 3"
@@ -111,10 +120,11 @@
                                          Command="{Binding DataContext.OnSelectRoom, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
                                          CommandParameter="{Binding}"
                                         />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </WrapPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
         </StackPanel>
         <!-- Часть управления номером -->
         <StackPanel Visibility="{Binding SelectedRoom, Converter={StaticResource ObjectToVisibilityConverter}}"

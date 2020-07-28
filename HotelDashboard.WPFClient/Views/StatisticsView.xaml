@@ -3,22 +3,174 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
+             xmlns:enums="clr-namespace:HotelDashboard.WPFClient.Views.Enums"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <lvc:PieChart LegendLocation="Bottom" Hoverable="False" DataTooltip="{x:Null}">
-            <lvc:PieChart.Series>
-                <lvc:PieSeries Title="Maria" Values="3" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}"/>
-                <lvc:PieSeries Title="Charles" Values="4" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                <lvc:PieSeries Title="Frida" Values="6" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-            </lvc:PieChart.Series>
-        </lvc:PieChart>
-    </Grid>
+
+    <UserControl.Resources>
+        <conv:IndexConverter x:Key="IndexConverter"/>
+        <conv:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
+        <conv:RoomTypeToStringConverter x:Key="RoomTypeToStringConverter"/>
+        <conv:PlotTypeToStringConverter x:Key="PlotTypeToStringConverter"/>
+        <conv:BoolToEnumConverter x:Key="BoolToEnumConverter"/>
+        <conv:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <UniformGrid Columns="2" Background="DarkGray">
+        <StackPanel HorizontalAlignment="Left" Background="Gray">
+            <!-- Блок корпусов -->
+            <StackPanel Visibility="{Binding Corps, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="Корпус" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 5, 0, 5">
+                </TextBlock>
+                <!-- Панель с корпусами -->
+                <WrapPanel Height="50" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="CorpsList" ItemsSource="{Binding Corps}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Corps"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="0, 0, 3, 3"
+                                                 Style="{StaticResource {x:Type ToggleButton}}"
+                                                 Content="{Binding Id}"
+                                                 Command="{Binding DataContext.OnSelectCorps, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                                 CommandParameter="{Binding}"
+                                                 />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+            <!-- Блок этажей-->
+            <StackPanel HorizontalAlignment="Center"
+                        Visibility="{Binding SelectedCorps,Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="Этаж" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 0, 0, 5">
+                </TextBlock>
+                <!-- Панель с этажами -->
+                <WrapPanel Height="100" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="FloorList" ItemsSource="{Binding Floors}" AlternationCount="8">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Floors"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="0, 0, 3, 3"
+                                                 Style="{StaticResource {x:Type ToggleButton}}"
+                                                 Content="{Binding Path=(ItemsControl.AlternationIndex), 
+                                                                   RelativeSource={RelativeSource Mode=TemplatedParent},
+                                                                   Converter={StaticResource IndexConverter}}"
+                                                 Command="{Binding DataContext.OnSelectFloor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                                 CommandParameter="{Binding}"
+                                                 />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+            <!-- Блок типа комнаты -->
+            <StackPanel HorizontalAlignment="Center"
+                        Visibility="{Binding SelectedFloor, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <!-- Тип комнаты -->
+                <TextBlock Text="Тип комнаты" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 5, 0, 0">
+                </TextBlock>
+                <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="RoomTypesList" ItemsSource="{Binding RoomTypes}" AlternationCount="10">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="RoomTypes"
+                                             Height="30"
+                                             Margin="0, 0, 3, 3"
+                                             Content="{Binding Converter={StaticResource RoomTypeToStringConverter}}"
+                                             Command="{Binding DataContext.OnSelectRoomType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                             CommandParameter="{Binding}"
+                                             />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+            <!-- Тип графика -->
+            <TextBlock Text="Тип графика" 
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0, 5, 0, 0">
+            </TextBlock>
+            <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ItemsControl x:Name="PlotTypesList" ItemsSource="{Binding PlotTypes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton GroupName="PlotTypes"
+                                         Height="30"
+                                         Margin="0, 0, 3, 3"
+                                         Command="{Binding DataContext.OnSelectPlotType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
+                                         CommandParameter="{Binding}"
+                                         Content="{Binding Converter={StaticResource PlotTypeToStringConverter}}">
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+        </StackPanel>
+        
+        
+        <!-- Область графика-->
+        <Grid Visibility="{Binding StatisticsInfo, Converter={StaticResource ObjectToVisibilityConverter}}">
+            <!-- Столбцы -->
+            <Grid Visibility="{Binding SelectedPlotType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enums:PlotType.Column}}">
+                <lvc:CartesianChart Series="{Binding ColumnPlotSeries}" 
+                                LegendLocation="Bottom"
+                                >
+                </lvc:CartesianChart>
+            </Grid>
+            <!-- Строки -->
+            <Grid Visibility="{Binding SelectedPlotType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enums:PlotType.Row}}">
+                <lvc:CartesianChart Series="{Binding RowPlotSeries}" 
+                                LegendLocation="Bottom"
+                                >
+                </lvc:CartesianChart>
+            </Grid>
+            <!-- Круг -->
+            <Grid Visibility="{Binding SelectedPlotType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enums:PlotType.Pie}}">
+                <lvc:PieChart Series="{Binding PiePlotSeries}" 
+                                LegendLocation="Bottom"
+                                >
+                </lvc:PieChart>
+            </Grid>
+        </Grid>
+    </UniformGrid>
 </UserControl>
