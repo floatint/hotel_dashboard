@@ -1,6 +1,7 @@
 ﻿using HotelDashboard.Data.Models.Enums;
 using HotelDashboard.Services.DtoModels;
 using HotelDashboard.WPFClient.Models;
+using HotelDashboard.WPFClient.Services;
 using HotelDashboard.WPFClient.ViewModels.Commands;
 using HotelDashboard.WPFClient.Views.Enums;
 using LiveCharts;
@@ -231,8 +232,14 @@ namespace HotelDashboard.WPFClient.ViewModels
 
         public StatisticsViewModel()
         {
-            // начальное заполнение данными
-            Corps = new ObservableCollection<CorpsDto>(_controlModel.GetCorps());
+            try
+            {
+                // начальное заполнение данными
+                Corps = new ObservableCollection<CorpsDto>(_controlModel.GetCorps());
+            } catch(Exception ex)
+            {
+                _dialogService.ShowMessage("Ошибка", ex.ToString());
+            }
         }
 
         /// <summary>
@@ -398,5 +405,6 @@ namespace HotelDashboard.WPFClient.ViewModels
         private SeriesCollection _seriesView;
         private RoomType? _selectedRoomType;
         private PlotType? _selectedPlotType;
+        private IDialogService _dialogService = new DialogService();
     }
 }

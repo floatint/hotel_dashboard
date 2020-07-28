@@ -20,23 +20,25 @@
 
     <UniformGrid Columns="2" Background="DarkGray">
         <StackPanel HorizontalAlignment="Left" Background="Gray">
-            <TextBlock Text="Корпус" 
+            <!-- Блок корпусов -->
+            <StackPanel Visibility="{Binding Corps, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="Корпус" 
                                HorizontalAlignment="Center"
                                FontSize="12"
                                Margin="0, 5, 0, 5">
-            </TextBlock>
-            <!-- Блок с корпусами -->
-            <WrapPanel Height="50" HorizontalAlignment="Center" Orientation="Horizontal">
-                <ItemsControl x:Name="CorpsList" ItemsSource="{Binding Corps}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                </TextBlock>
+                <!-- Панель с корпусами -->
+                <WrapPanel Height="50" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ItemsControl x:Name="CorpsList" ItemsSource="{Binding Corps}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton GroupName="Corps"
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Corps"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="0, 0, 3, 3"
@@ -45,10 +47,11 @@
                                                  Command="{Binding DataContext.OnSelectCorps, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}"
                                                  CommandParameter="{Binding}"
                                                  />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </WrapPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
             <!-- Блок этажей-->
             <StackPanel HorizontalAlignment="Center"
                         Visibility="{Binding SelectedCorps,Converter={StaticResource ObjectToVisibilityConverter}}">

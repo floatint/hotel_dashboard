@@ -14,14 +14,14 @@ using System.Windows.Data;
 namespace HotelDashboard.WPFClient.ViewModels
 {
     /// <summary>
-    /// ViewModel управления гостинницей
+    /// ViewModel управления гостиницей
     /// </summary>
     class ControlViewModel : BaseViewModel
     {
         /// <summary>
         /// Корпусы
         /// </summary>
-        public ObservableCollection<CorpsDto> Coprs
+        public ObservableCollection<CorpsDto> Corps
         {
             get
             {

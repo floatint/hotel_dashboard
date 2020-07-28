@@ -11,7 +11,7 @@ namespace HotelDashboard.WPFClient.Models
     {
 
         /// <summary>
-        /// Получить корпусы гостинницы
+        /// Получить корпусы гостиницы
         /// </summary>
         public ObservableCollection<CorpsDto> GetCorps()
         {
