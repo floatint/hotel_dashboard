@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:HotelDashboard.WPFClient.ViewModels"
-        xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
-        xmlns:services="clr-namespace:HotelDashboard.Services.DtoModels.Enums;assembly=HotelDashboard.Services"
         xmlns:views="clr-namespace:HotelDashboard.WPFClient.Views"
         mc:Ignorable="d"
         Style="{StaticResource MainWindowStyle}"

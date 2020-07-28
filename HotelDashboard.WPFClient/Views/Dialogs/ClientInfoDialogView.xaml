@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HotelDashboard.WPFClient.Views.Dialogs"
         xmlns:conv="clr-namespace:HotelDashboard.WPFClient.Converters"
         mc:Ignorable="d"
         Style="{StaticResource ClientInfoDialogStyle}"
@@ -56,12 +55,12 @@
                      MaxLength="{StaticResource RegistrationAddressInputLength}"
                      Text="{Binding ClientInfo.RegistrationAddress}"/>
 
-            <Button Content="Ok" 
+            <Button Content="Сохранить" 
                     Width="100"
                     Height="30"
                     HorizontalAlignment="Right" 
                     Margin="0, 10, 0, 0"
-                    Command="{Binding OnOkCommand}"
+                    Command="{Binding OnSaveCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
 
 
