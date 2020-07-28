@@ -5,7 +5,7 @@ using System.Windows;
 namespace HotelDashboard.WPFClient.Services
 {
     /// <summary>
-    /// Интерфейс сервисов диалогов
+    /// Интерфейс сервиса диалогов
     /// </summary>
     interface IDialogService
     {

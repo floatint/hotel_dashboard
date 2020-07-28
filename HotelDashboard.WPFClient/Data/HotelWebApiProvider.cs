@@ -6,7 +6,7 @@ using System.Windows;
 namespace HotelDashboard.WPFClient.Data
 {
     /// <summary>
-    /// Провайдер Web Api для сервера гостинницы
+    /// Провайдер Web Api для сервера гостиницы
     /// </summary>
     class HotelWebApiProvider : IHotelProvider
     {

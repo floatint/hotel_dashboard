@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime">
-    <!-- Максимальная продолжительность резервирования/проживания -->
+    <!-- Максимальная продолжительность резервирования/проживания в месяцах -->
     <sys:Int32 x:Key="ReserveMonthsCount">3</sys:Int32>
 </ResourceDictionary>

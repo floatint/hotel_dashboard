@@ -62,6 +62,9 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
         }
 
 
+        /// <summary>
+        /// Выбранная начальная дата
+        /// </summary>
         public DateTime StartDate
         {
             set
@@ -120,7 +123,7 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
         }
 
         /// <summary>
-        /// DisplayDateStart для даты окончания
+        /// DisplayDateStart для конечной
         /// </summary>
         public DateTime SecondDisplayDateStart
         {
@@ -136,7 +139,7 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
         }
 
         /// <summary>
-        /// DisplayDateEnd для даты окончания
+        /// DisplayDateEnd для конечной
         /// </summary>
         public DateTime SecondDisplayDateEnd
         {
@@ -153,7 +156,8 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 
 
         /// <summary>
-        /// Подтверждение резервирования. На вход должен получить класс Window, чтобы закрыть диалог.
+        /// Подтверждение резервирования. 
+        /// На вход должен получить класс Window, чтобы закрыть диалог.
         /// </summary>
         public BaseCommand OnSaveCommand => new BaseCommand((o) =>
         {
@@ -176,9 +180,6 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 
         public DateInputDialogViewModel()
         {
-            _model = new DateInputDialogModel();
-            _dialogService = new DialogService();
-
             // установим начальные значения
             StartDate = DateTime.Now.Date;
             EndDate = DateTime.Now.Date;
@@ -186,8 +187,8 @@ namespace HotelDashboard.WPFClient.ViewModels.Dialogs
 
         private DateTime _startDate;
         private DateTime _endDate;
-        private DateInputDialogModel _model;
-        private IDialogService _dialogService;
+        private readonly DateInputDialogModel _model = new DateInputDialogModel();
+        private readonly IDialogService _dialogService = new DialogService();
         private ReserveDataDto _dialogResult;
         private string _title;
         private object[] _data;

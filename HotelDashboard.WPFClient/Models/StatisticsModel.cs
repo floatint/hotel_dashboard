@@ -5,7 +5,7 @@ using HotelDashboard.WPFClient.Data;
 namespace HotelDashboard.WPFClient.Models
 {
     /// <summary>
-    /// Модель для работы со статистикой гостинницы
+    /// Модель для работы со статистикой гостиницы
     /// </summary>
     class StatisticsModel
     {
@@ -33,7 +33,7 @@ namespace HotelDashboard.WPFClient.Models
         }
 
         /// <summary>
-        /// Получуть статистику по этажу по типу комнаты
+        /// Получить статистику по этажу по типу комнаты
         /// </summary>
         /// <param name="floorDto">DTO этажа</param>
         /// <param name="roomType">Тип комнаты</param>

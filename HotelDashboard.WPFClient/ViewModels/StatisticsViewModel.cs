@@ -76,7 +76,7 @@ namespace HotelDashboard.WPFClient.ViewModels
             }
         }
         /// <summary>
-        /// Корпусы
+        /// Корпуса
         /// </summary>
         public ObservableCollection<CorpsDto> Corps
         {
@@ -209,6 +209,9 @@ namespace HotelDashboard.WPFClient.ViewModels
             SelectedCorps = (CorpsDto)o;
         });
 
+        /// <summary>
+        /// Команда выбора этажа
+        /// </summary>
         public ICommand OnSelectFloor => new BaseCommand(o =>
         {
             SelectedFloor = (FloorDto)o;
@@ -243,7 +246,8 @@ namespace HotelDashboard.WPFClient.ViewModels
         }
 
         /// <summary>
-        /// Приватное свойство. Вызывает конвертацию статистики в формат графика
+        /// Загруженная статистика.
+        /// Вызывает конвертацию в формат графика
         /// </summary>
         public StatisticsInfoDto StatisticsInfo
         {
@@ -273,7 +277,7 @@ namespace HotelDashboard.WPFClient.ViewModels
             // надписи
             string freeRoomTitle = "Свободно";
             string reservedRoomTitle = "Зарезервировано";
-            string populatedRoomTitle = "Заселено";
+            string populatedRoomTitle = "Занято";
             // 
             SolidColorBrush freeRoomBrush = (SolidColorBrush)Application.Current.Resources["FreeRoomBrush"];
             SolidColorBrush reservedRoomBrush = (SolidColorBrush)Application.Current.Resources["ReservedRoomBrush"];

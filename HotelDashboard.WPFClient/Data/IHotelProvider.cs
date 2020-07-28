@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace HotelDashboard.WPFClient.Data
 {
     /// <summary>
-    /// Интерфейс для работы с источником данных гостинницы
+    /// Интерфейс для работы с источником данных гостиницы
     /// </summary>
     public interface IHotelProvider
     {
         /// <summary>
-        /// Получить список всех корпусов гостинницы
+        /// Получить список всех корпусов гостиницы
         /// </summary>
         /// <typeparam name="TCorpsDto">Тип DTO корпуса</typeparam>
         IEnumerable<TCorpsDto> GetAllCorps<TCorpsDto>();

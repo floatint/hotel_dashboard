@@ -17,7 +17,7 @@ namespace HotelDashboard.WPFClient.Converters
                 RoomType.Single => "Одноместная",
                 RoomType.Double => "Двухместная",
                 RoomType.Family => "Семейная",
-                _ => "Одноместная",
+                _ => null,
             };
         }
 

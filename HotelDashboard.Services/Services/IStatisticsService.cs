@@ -20,7 +20,7 @@ namespace HotelDashboard.Services.Services
         /// <param name="floorId">ID этажа</param>
         Task<StatisticsInfoDto> GetFloorStatisticsAsync(int floorId);
         /// <summary>
-        /// Получить статистику по по типу комнат
+        /// Получить статистику по этажу по типу комнаты
         /// </summary>
         /// <param name="roomType">Тип комнаты</param>
         /// <param name="floorId">ID этажа</param>

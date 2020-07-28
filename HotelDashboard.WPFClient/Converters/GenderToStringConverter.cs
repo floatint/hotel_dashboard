@@ -16,7 +16,7 @@ namespace HotelDashboard.WPFClient.Converters
             {
                 ClientGender.Male => "Мужской",
                 ClientGender.Female => "Женский",
-                _ => "Мужской",
+                _ => null,
             };
         }
 

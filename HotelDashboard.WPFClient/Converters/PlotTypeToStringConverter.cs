@@ -17,7 +17,7 @@ namespace HotelDashboard.WPFClient.Converters
                 PlotType.Column => "Столбцы",
                 PlotType.Row => "Строки",
                 PlotType.Pie => "Круговая",
-                _ => "Столбцы",
+                _ => null,
             };
         }
 

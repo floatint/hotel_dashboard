@@ -5,13 +5,13 @@ using System.Collections.ObjectModel;
 namespace HotelDashboard.WPFClient.Models
 {
     /// <summary>
-    /// Модель управления
+    /// Модель управления гостиницей
     /// </summary>
     public class ControlModel
     {
 
         /// <summary>
-        /// Получить корпусы гостиницы
+        /// Получить корпуса гостиницы
         /// </summary>
         public ObservableCollection<CorpsDto> GetCorps()
         {

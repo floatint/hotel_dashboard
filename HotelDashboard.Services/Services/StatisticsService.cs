@@ -16,15 +16,15 @@ namespace HotelDashboard.Services.Services
     {
         public StatisticsService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
-            corpsRepository = unitOfWork.GetRepository<Corps>();
-            floorRepository = unitOfWork.GetRepository<Floor>();
-            roomRepository = unitOfWork.GetRepository<Room>();
+            this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
+            _corpsRepository = unitOfWork.GetRepository<Corps>();
+            _floorRepository = unitOfWork.GetRepository<Floor>();
+            _roomRepository = unitOfWork.GetRepository<Room>();
         }
         public async Task<StatisticsInfoDto> GetCorpsStatisticsAsync(int corpsId)
         {
-            if (await corpsRepository.GetByIdAsync(corpsId) == null)
+            if (await _corpsRepository.GetByIdAsync(corpsId) == null)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -32,12 +32,12 @@ namespace HotelDashboard.Services.Services
             {
                 StatisticsInfoDto statisticsInfoDto = new StatisticsInfoDto();
                 // получаем все этажи
-                var floors = (await floorRepository.GetAllAsync()).Where(x => x.CorpsId == corpsId);
+                var floors = (await _floorRepository.GetAllAsync()).Where(x => x.CorpsId == corpsId);
                 // идем по этажам
                 foreach (var f in floors)
                 {
                     // получаем комнаты этажа
-                    var rooms = (await roomRepository.GetAllAsync()).Where(x => x.FloorId == f.Id);
+                    var rooms = (await _roomRepository.GetAllAsync()).Where(x => x.FloorId == f.Id);
                     foreach (var r in rooms)
                     {
                         if (r.Status != null)
@@ -63,7 +63,7 @@ namespace HotelDashboard.Services.Services
 
         public async Task<StatisticsInfoDto> GetFloorStatisticsAsync(int floorId)
         {
-            Floor floor = await floorRepository.GetByIdAsync(floorId);
+            Floor floor = await _floorRepository.GetByIdAsync(floorId);
             if (floor == null)
             {
                 throw new ArgumentOutOfRangeException();
@@ -95,7 +95,7 @@ namespace HotelDashboard.Services.Services
 
         public async Task<StatisticsInfoDto> GetRoomTypeStatisticsAsync(int floorId, RoomType roomType)
         {
-            Floor floor = await floorRepository.GetByIdAsync(floorId);
+            Floor floor = await _floorRepository.GetByIdAsync(floorId);
             if (floor == null)
             {
                 throw new ArgumentOutOfRangeException();
@@ -131,40 +131,12 @@ namespace HotelDashboard.Services.Services
                     return statisticsInfoDto;
                 }
             }
-            //var rooms = (await roomRepository.GetAllAsync()).Where(x => x.Type == roomType);
-            //if (rooms.Count() == 0)
-            //{
-            //    throw new Exception();
-            //}
-            //else
-            //{
-            //    StatisticsInfoDto statisticsInfoDto = new StatisticsInfoDto();
-            //    foreach(var r in rooms)
-            //    {
-            //        if (r.Status != null)
-            //        {
-            //            if (r.Status.Clients != null && r.Status.Clients.Count != 0)
-            //            {
-            //                statisticsInfoDto.PopulatedRoomCount++;
-            //            }
-            //            else
-            //            {
-            //                statisticsInfoDto.ReservedRoomCount++;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            statisticsInfoDto.FreeRoomCount++;
-            //        }
-            //    }
-            //    return statisticsInfoDto;
-            //}
         }
 
-        private IUnitOfWork unitOfWork;
-        private IMapper mapper;
-        private ICRUDRepository<Corps> corpsRepository;
-        private ICRUDRepository<Floor> floorRepository;
-        private ICRUDRepository<Room> roomRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ICRUDRepository<Corps> _corpsRepository;
+        private readonly ICRUDRepository<Floor> _floorRepository;
+        private readonly ICRUDRepository<Room> _roomRepository;
     }
 }

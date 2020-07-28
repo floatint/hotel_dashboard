@@ -9,20 +9,23 @@ using System.Windows.Data;
 namespace HotelDashboard.WPFClient.Converters
 {
     /// <summary>
-    /// Конвертер RoomIndoDto -> Visibility
+    /// Конвертер RoomInfoDto -> Visibility
     /// </summary>
     class RoomInfoToVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             RoomState state = (RoomState)parameter;
+            // если значение и параметр == null, то блок не создается
             if (values == null || values[0] == null)
             {
                 return Visibility.Collapsed;
             }
             else
             {
+                // получаем переданное значение
                 RoomInfoDto roomInfoDto = values[0] as RoomInfoDto;
+                // сопоставляем параметр и переданное значение
                 switch (state)
                 {
                     case RoomState.Free:

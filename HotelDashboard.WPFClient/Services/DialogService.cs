@@ -17,7 +17,7 @@ namespace HotelDashboard.WPFClient.Services
             // создание представления и логики
             TViewModel viewModel = new TViewModel();
             TView view = new TView();
-            // установка свойст модели
+            // установка свойств модели
             viewModel.Title = title;
             if (data != null)
             {
