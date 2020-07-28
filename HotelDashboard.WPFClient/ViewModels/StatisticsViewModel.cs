@@ -4,7 +4,6 @@ using HotelDashboard.WPFClient.Models;
 using HotelDashboard.WPFClient.ViewModels.Commands;
 using HotelDashboard.WPFClient.Views.Enums;
 using LiveCharts;
-using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.ObjectModel;
@@ -111,12 +110,12 @@ namespace HotelDashboard.WPFClient.ViewModels
         /// Список типов комнаты
         /// </summary>
         public ObservableCollection<RoomType> RoomTypes { get; } = new ObservableCollection<RoomType>(Enum.GetValues(typeof(RoomType)).Cast<RoomType>().ToArray());
-        
+
         /// <summary>
         /// Список типов графика
         /// </summary>
         public ObservableCollection<PlotType> PlotTypes { get; } = new ObservableCollection<PlotType>(Enum.GetValues(typeof(PlotType)).Cast<PlotType>().ToArray());
-       
+
         /// <summary>
         /// Выбранный корпус
         /// </summary>
@@ -209,21 +208,24 @@ namespace HotelDashboard.WPFClient.ViewModels
             SelectedCorps = (CorpsDto)o;
         });
 
-        public ICommand OnSelectFloor => new BaseCommand(o => {
+        public ICommand OnSelectFloor => new BaseCommand(o =>
+        {
             SelectedFloor = (FloorDto)o;
         });
 
         /// <summary>
         /// Команда выбора типа комнаты
         /// </summary>
-        public ICommand OnSelectRoomType => new BaseCommand(o => {
+        public ICommand OnSelectRoomType => new BaseCommand(o =>
+        {
             SelectedRoomType = (RoomType)o;
         });
 
         /// <summary>
         /// Команда выбора типа графика
         /// </summary>
-        public ICommand OnSelectPlotType => new BaseCommand(o => {
+        public ICommand OnSelectPlotType => new BaseCommand(o =>
+        {
             SelectedPlotType = (PlotType)o;
         });
 
@@ -278,21 +280,21 @@ namespace HotelDashboard.WPFClient.ViewModels
                         seriesViews.Add(new ColumnSeries()
                         {
                             Title = freeRoomTitle,
-                            Values = new ChartValues<int> { statisticsInfoDto.FreeRoomCount},
+                            Values = new ChartValues<int> { statisticsInfoDto.FreeRoomCount },
                             Fill = freeRoomBrush,
                             DataLabels = true
                         });
                         seriesViews.Add(new ColumnSeries()
                         {
                             Title = reservedRoomTitle,
-                            Values = new ChartValues<int> { statisticsInfoDto.ReservedRoomCount},
+                            Values = new ChartValues<int> { statisticsInfoDto.ReservedRoomCount },
                             Fill = reservedRoomBrush,
                             DataLabels = true
                         });
                         seriesViews.Add(new ColumnSeries()
                         {
                             Title = populatedRoomTitle,
-                            Values = new ChartValues<int> { statisticsInfoDto.PopulatedRoomCount},
+                            Values = new ChartValues<int> { statisticsInfoDto.PopulatedRoomCount },
                             Fill = populatedRoomBrush,
                             DataLabels = true
                         });
@@ -345,7 +347,7 @@ namespace HotelDashboard.WPFClient.ViewModels
                             Values = new ChartValues<int> { statisticsInfoDto.PopulatedRoomCount },
                             Fill = populatedRoomBrush,
                             DataLabels = true
-                            
+
                         });
                         return seriesViews;
                     }

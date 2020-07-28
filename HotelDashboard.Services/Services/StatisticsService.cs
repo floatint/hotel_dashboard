@@ -4,9 +4,7 @@ using HotelDashboard.Data.Models.Enums;
 using HotelDashboard.Data.Repositories;
 using HotelDashboard.Services.DtoModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelDashboard.Services.Services
@@ -36,7 +34,7 @@ namespace HotelDashboard.Services.Services
                 // получаем все этажи
                 var floors = (await floorRepository.GetAllAsync()).Where(x => x.CorpsId == corpsId);
                 // идем по этажам
-                foreach(var f in floors)
+                foreach (var f in floors)
                 {
                     // получаем комнаты этажа
                     var rooms = (await roomRepository.GetAllAsync()).Where(x => x.FloorId == f.Id);
@@ -73,7 +71,7 @@ namespace HotelDashboard.Services.Services
             else
             {
                 StatisticsInfoDto statisticsInfoDto = new StatisticsInfoDto();
-                foreach(var r in floor.Rooms)
+                foreach (var r in floor.Rooms)
                 {
                     if (r.Status != null)
                     {

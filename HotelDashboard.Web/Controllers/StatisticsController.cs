@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelDashboard.Data.Models.Enums;
+﻿using HotelDashboard.Data.Models.Enums;
 using HotelDashboard.Services.DtoModels;
 using HotelDashboard.Services.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HotelDashboard.Web.Controllers
 {

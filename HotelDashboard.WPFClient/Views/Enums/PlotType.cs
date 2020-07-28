@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelDashboard.WPFClient.Views.Enums
+﻿namespace HotelDashboard.WPFClient.Views.Enums
 {
     /// <summary>
     /// Тип графика
