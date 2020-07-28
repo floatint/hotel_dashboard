@@ -11,15 +11,25 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="{Binding StartDateTitle}" FontSize="16"/>
-            <DatePicker FontSize="16" IsDropDownOpen="False" SelectedDateFormat="Short" SelectedDate="{Binding StartDate}"/>
+            <DatePicker x:Name="Start" FontSize="16" 
+                        IsDropDownOpen="False" 
+                        SelectedDateFormat="Short" 
+                        SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        DisplayDateStart="{Binding FirstDisplayDateStart, Mode=OneWay}"
+                        DisplayDateEnd="{Binding FirstDisplayDateEnd, Mode=OneWay}"/>
             <TextBlock Text="{Binding EndDateTitle}" FontSize="16"/>
-            <DatePicker FontSize="16" IsDropDownOpen="False" SelectedDateFormat="Short" SelectedDate="{Binding EndDate}"/>
+            <DatePicker FontSize="16" 
+                        IsDropDownOpen="False" 
+                        SelectedDateFormat="Short" 
+                        SelectedDate="{Binding EndDate}"
+                        DisplayDateStart="{Binding SecondDisplayDateStart}"
+                        DisplayDateEnd="{Binding SecondDisplayDateEnd}"/>
             <Button Width="100" 
                     Height="30" 
                     Content="Сохранить" 
                     Margin="0, 10, 0, 0"
                     HorizontalAlignment="Right"
-                    Command="{Binding OnOkCommand}"
+                    Command="{Binding OnSaveCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
         </StackPanel>
     </Grid>

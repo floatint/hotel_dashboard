@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace HotelDashboard.WPFClient.Models.Dialogs
 {
@@ -27,9 +28,30 @@ namespace HotelDashboard.WPFClient.Models.Dialogs
                 }
                 else
                 {
-                    return true;
+                    // проверим, что конечная дата не больше чем на N месяцев от начальной даты
+                    var maxDate = CalcPeriod(startDate);
+                    if (endDate > maxDate)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
             }
+        }
+
+        public DateTime CalcPeriod(DateTime dateTime)
+        {
+            // выбираем кол-во месяцев из ресурсов
+            object monthsCount = Application.Current.Resources["ReserveMonthsCount"];
+            if (monthsCount == null)
+            {
+                // устанавливаем по умолчанию
+                monthsCount = 3;
+            }
+            return dateTime.AddMonths((int)monthsCount);
         }
     }
 }

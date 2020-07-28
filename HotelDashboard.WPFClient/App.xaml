@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="WebApiSettings.xaml"/>
                 <ResourceDictionary Source="UISettings.xaml"/>
+                <ResourceDictionary Source="AppSettings.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
